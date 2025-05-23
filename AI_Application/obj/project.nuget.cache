@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "b/SpcYbrVAE=",
+  "dgSpecHash": "FEaQM3YIZqk=",
   "success": true,
-  "projectFilePath": "D:\\Uni\\Công nghệ phần mềm\\AI_Application\\AI_Application.csproj",
+  "projectFilePath": "D:\\ĐỒ ÁN CÔNG NGHỆ PHẦN MỀM\\AI_Application\\AI_Application.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Acer\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.22.1-preview.1\\microsoft.visualstudio.azure.containers.tools.targets.1.22.1-preview.1.nupkg.sha512"
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.22.1-preview.1\\microsoft.visualstudio.azure.containers.tools.targets.1.22.1-preview.1.nupkg.sha512"
   ],
   "logs": []
 }
