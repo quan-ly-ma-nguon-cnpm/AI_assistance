@@ -1,5 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var a = 3;
+    var ten = "Duy";
 }
 
 <!DOCTYPE html>
@@ -27,8 +29,10 @@
 <!-- Trigger Button -->
 <div class="text-center mt-5">
   <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">
-    Register
+    Register @a
   </button>
+  <h1 class="mess">Xin chào tôi tên @ten</h1>
+  <a href="../Views/Admin/index.cshtml" class="link_url">Admin</a>
 </div>
 
 <!-- Register Modal -->
