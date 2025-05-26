@@ -13,7 +13,7 @@ using System.Reflection;
 
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("fe717878-74e0-4e00-9785-0a4e8200b0ac")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("AI_Application")]
-[assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+77705f9b96b85dbc79849aefd40b9914d4481f60")]
 [assembly: System.Reflection.AssemblyProductAttribute("AI_Application")]

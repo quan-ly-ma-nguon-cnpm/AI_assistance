@@ -92,3 +92,4 @@ D:\Uni\Công nghệ phần mềm\AI_Application\obj\Debug\net9.0\compressed\gudf
 D:\Uni\Công nghệ phần mềm\AI_Application\obj\Debug\net9.0\compressed\jfbjj6ncws-jjsuc0puko.gz
 D:\Uni\Công nghệ phần mềm\AI_Application\obj\Debug\net9.0\compressed\ybmhg3o9st-9vr69e8ynj.gz
 D:\Uni\Công nghệ phần mềm\AI_Application\obj\Debug\net9.0\compressed\11dn1s9yxu-6cygptj7ax.gz
+D:\Uni\Công nghệ phần mềm\AI_Application\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
