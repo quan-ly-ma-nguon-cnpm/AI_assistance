@@ -195,9 +195,7 @@ D:\ĐỒ ÁN CÔNG NGHỆ PHẦN MỀM\AI_Application\obj\Debug\net9.0\AI_Applic
 D:\ĐỒ ÁN CÔNG NGHỆ PHẦN MỀM\AI_Application\obj\Debug\net9.0\ref\AI_Application.dll
 =======
 D:\Uni\Công nghệ phần mềm\AI_Application\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
-<<<<<<< HEAD
 >>>>>>> 7b04a9334f7f127e47724a3bbae8c43cc3d6796b
-=======
 D:\Uni\Công nghệ phần mềm\AI_Application\bin\Debug\net9.0\Azure.Core.dll
 D:\Uni\Công nghệ phần mềm\AI_Application\bin\Debug\net9.0\Azure.Identity.dll
 D:\Uni\Công nghệ phần mềm\AI_Application\bin\Debug\net9.0\Humanizer.dll
