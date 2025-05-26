@@ -92,6 +92,7 @@ D:\Uni\Công nghệ phần mềm\AI_Application\obj\Debug\net9.0\compressed\gudf
 D:\Uni\Công nghệ phần mềm\AI_Application\obj\Debug\net9.0\compressed\jfbjj6ncws-jjsuc0puko.gz
 D:\Uni\Công nghệ phần mềm\AI_Application\obj\Debug\net9.0\compressed\ybmhg3o9st-9vr69e8ynj.gz
 D:\Uni\Công nghệ phần mềm\AI_Application\obj\Debug\net9.0\compressed\11dn1s9yxu-6cygptj7ax.gz
+<<<<<<< HEAD
 D:\ĐỒ ÁN CÔNG NGHỆ PHẦN MỀM\AI_Application\bin\Debug\net9.0\appsettings.Development.json
 D:\ĐỒ ÁN CÔNG NGHỆ PHẦN MỀM\AI_Application\bin\Debug\net9.0\appsettings.json
 D:\ĐỒ ÁN CÔNG NGHỆ PHẦN MỀM\AI_Application\bin\Debug\net9.0\AI_Application.staticwebassets.runtime.json
@@ -192,3 +193,6 @@ D:\ĐỒ ÁN CÔNG NGHỆ PHẦN MỀM\AI_Application\obj\Debug\net9.0\refint\AI
 D:\ĐỒ ÁN CÔNG NGHỆ PHẦN MỀM\AI_Application\obj\Debug\net9.0\AI_Application.pdb
 D:\ĐỒ ÁN CÔNG NGHỆ PHẦN MỀM\AI_Application\obj\Debug\net9.0\AI_Application.genruntimeconfig.cache
 D:\ĐỒ ÁN CÔNG NGHỆ PHẦN MỀM\AI_Application\obj\Debug\net9.0\ref\AI_Application.dll
+=======
+D:\Uni\Công nghệ phần mềm\AI_Application\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
+>>>>>>> 7b04a9334f7f127e47724a3bbae8c43cc3d6796b
