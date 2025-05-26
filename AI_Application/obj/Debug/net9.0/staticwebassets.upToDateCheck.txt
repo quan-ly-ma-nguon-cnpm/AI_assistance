@@ -64,6 +64,7 @@ wwwroot\lib\jquery\dist\jquery.slim.min.map
 wwwroot\lib\jquery\LICENSE.txt
 D:\Uni\Công nghệ phần mềm\AI_Application\wwwroot\css\Home_index.css
 D:\Uni\Công nghệ phần mềm\AI_Application\wwwroot\css\site.css
+D:\Uni\Công nghệ phần mềm\AI_Application\wwwroot\favicon.ico
 D:\Uni\Công nghệ phần mềm\AI_Application\wwwroot\js\site.js
 D:\Uni\Công nghệ phần mềm\AI_Application\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 D:\Uni\Công nghệ phần mềm\AI_Application\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
@@ -124,4 +125,3 @@ D:\Uni\Công nghệ phần mềm\AI_Application\wwwroot\lib\jquery\dist\jquery.s
 D:\Uni\Công nghệ phần mềm\AI_Application\wwwroot\lib\jquery\dist\jquery.slim.min.js
 D:\Uni\Công nghệ phần mềm\AI_Application\wwwroot\lib\jquery\dist\jquery.slim.min.map
 D:\Uni\Công nghệ phần mềm\AI_Application\wwwroot\lib\jquery\LICENSE.txt
-D:\Uni\Công nghệ phần mềm\AI_Application\wwwroot\favicon.ico
