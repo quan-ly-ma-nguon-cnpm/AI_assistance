@@ -87,7 +87,6 @@ D:\Uni\Công nghệ phần mềm\AI_Application\obj\Debug\net9.0\staticwebassets
 D:\Uni\Công nghệ phần mềm\AI_Application\obj\Debug\net9.0\staticwebassets.build.json.cache
 D:\Uni\Công nghệ phần mềm\AI_Application\obj\Debug\net9.0\staticwebassets.development.json
 D:\Uni\Công nghệ phần mềm\AI_Application\obj\Debug\net9.0\staticwebassets.build.endpoints.json
-D:\Uni\Công nghệ phần mềm\AI_Application\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 D:\Uni\Công nghệ phần mềm\AI_Application\obj\Debug\net9.0\AI_Application.dll
 D:\Uni\Công nghệ phần mềm\AI_Application\obj\Debug\net9.0\refint\AI_Application.dll
 D:\Uni\Công nghệ phần mềm\AI_Application\obj\Debug\net9.0\AI_Application.pdb
