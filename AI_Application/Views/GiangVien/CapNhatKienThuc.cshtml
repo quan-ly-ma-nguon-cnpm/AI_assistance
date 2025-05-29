@@ -1,0 +1,25 @@
+@model SEHannah.Models.KienThucViewModel
+@{
+    ViewData["Title"] = "Cập nhật kiến thức";
+}
+<h2>Cập nhật kiến thức</h2>
+
+@if (!string.IsNullOrEmpty(ViewBag.ThongBao)) {
+    <div class="alert alert-info">@ViewBag.ThongBao</div>
+}
+
+<form asp-action="CapNhatKienThuc" method="post">
+    <div class="mb-3">
+        <label>Tiêu đề</label>
+        <input asp-for="TieuDe" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Nội dung</label>
+        <textarea asp-for="NoiDung" class="form-control" rows="6"></textarea>
+    </div>
+    <div class="mb-3">
+        <label>Thẻ (Tag)</label>
+        <input asp-for="Tag" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Gửi</button>
+</form>
