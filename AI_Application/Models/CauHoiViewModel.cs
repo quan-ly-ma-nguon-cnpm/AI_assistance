@@ -1,9 +1,13 @@
-namespace SEHannah.Models
+namespace AI_Application.Models
 {
     public class CauHoiViewModel
     {
-        public string TieuDe { get; set; } = string.Empty;
-        public string NoiDung { get; set; } = string.Empty;
-        // ...
+        public int Id { get; set; }
+        public string TieuDe { get; set; }
+        public string LinhVuc { get; set; }
+        public DateTime NgayTao { get; set; }
+        public string NguoiGui { get; set; }
+        public bool DaDuyet { get; set; }
     }
+
 }
