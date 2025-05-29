@@ -1,9 +1,9 @@
-namespace AI_Application.Models
+namespace SEHannah.Models
 {
-    public class ErrorViewModel
+    public class KienThucViewModel
     {
-        public string? RequestId { get; set; }
-
-        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+        public string TieuDe { get; set; }
+        public string NoiDung { get; set; }
+        public string Tag { get; set; }
     }
 }
