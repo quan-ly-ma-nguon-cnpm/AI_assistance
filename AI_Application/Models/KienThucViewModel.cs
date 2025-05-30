@@ -1,9 +1,9 @@
-namespace SEHannah.Models
+namespace AI_Application.Models
 {
     public class KienThucViewModel
     {
-        public string TieuDe { get; set; }
-        public string NoiDung { get; set; }
-        public string Tag { get; set; }
+        public required string TieuDe { get; set; }
+        public required string NoiDung { get; set; }
+        public required string Tag { get; set; }
     }
 }
