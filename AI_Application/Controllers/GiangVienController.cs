@@ -5,7 +5,6 @@ namespace AI_Application.Controllers
 {
     public class GiangVienController : Controller
     {
-
         public IActionResult Index()
         {
             return View();
