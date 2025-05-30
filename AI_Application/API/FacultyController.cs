@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace AI_Application.API.Controllers
+namespace AI_Application.Controllers.API
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class FacultyController : ControllerBase
+    public class FacultyController : Controller
     {
         [HttpGet("review")]
         public IActionResult GetPendingReviews()

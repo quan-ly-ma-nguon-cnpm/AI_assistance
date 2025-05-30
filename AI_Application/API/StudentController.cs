@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace AI_Application.API.Controllers
+namespace AI_Application.Controllers.API
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class StudentController : ControllerBase
+    public class StudentController : Controller
     {
         [HttpPost("ask")]
         public IActionResult AskQuestion([FromBody] StudentQuestion question)
@@ -22,8 +22,8 @@ namespace AI_Application.API.Controllers
 
     public class StudentQuestion
     {
-        public string StudentId { get; set; }
-        public string QuestionText { get; set; }
+        public required string StudentId { get; set; }
+        public required string QuestionText { get; set; }
         public DateTime CreatedAt { get; set; }
     }
 }
