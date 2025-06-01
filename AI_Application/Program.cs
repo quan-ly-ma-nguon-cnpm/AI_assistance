@@ -1,10 +1,10 @@
-using Microsoft.AspNetCore.Identity; 
-using Microsoft.EntityFrameworkCore; 
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using AI_Application.Data; 
-using System; 
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure; 
-using Microsoft.Extensions.Logging; 
-using Microsoft.AspNetCore.Identity.UI; 
+using System;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Identity.UI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +18,7 @@ if (string.IsNullOrEmpty(connectionString))
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(connectionString,
         ServerVersion.AutoDetect(connectionString),
-        mySqlOptions => mySqlOptions.EnableRetryOnFailure( 
+        mySqlOptions => mySqlOptions.EnableRetryOnFailure(
             maxRetryCount: 10,
             maxRetryDelay: TimeSpan.FromSeconds(30),
             errorNumbersToAdd: null)
@@ -27,9 +27,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>() 
-    .AddEntityFrameworkStores<ApplicationDbContext>(); 
+    .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(); 
 builder.Services.AddRazorPages(); 
 
 var app = builder.Build();
@@ -48,7 +48,6 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
@@ -61,17 +60,17 @@ else
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();   
+app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication(); 
+app.UseAuthorization(); 
 
-app.UseAuthentication();
-app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.MapRazorPages();
+app.MapRazorPages(); 
 
 app.Run();

@@ -10,12 +10,11 @@
 using System;
 using System.Reflection;
 
-[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("504db0b0-d96b-469f-a671-7c6203f69d4c")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("AI_Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e95eed4a03ab1a5af450d4f21a9027aacca27954")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+91e67c0cf98fe5630e17c662cba5f72659907287")]
 [assembly: System.Reflection.AssemblyProductAttribute("AI_Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AI_Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
