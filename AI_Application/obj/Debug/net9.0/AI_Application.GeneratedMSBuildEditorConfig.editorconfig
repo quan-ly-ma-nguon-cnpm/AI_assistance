@@ -1,69 +1,121 @@
 is_global = true
 build_property.TargetFramework = net9.0
+build_property.TargetFramework = net9.0
+build_property.TargetPlatformMinVersion = 
 build_property.TargetPlatformMinVersion = 
 build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
 build_property.ProjectTypeGuids = 
 build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
 build_property.PlatformNeutralAssembly = 
 build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = AI_Application
 build_property.RootNamespace = AI_Application
-build_property.ProjectDir = D:\Uni\Công nghệ phần mềm\AI_Application\
+build_property.ProjectDir = C:\Users\taing\OneDrive\Máy tính\CNPM - Tai\AI_Application\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
-build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\Uni\Công nghệ phần mềm\AI_Application
+build_property.GenerateRazorMetadataSourceChecksumAttributes = true
+build_property.MSBuildProjectDirectory = C:\Users\taing\OneDrive\Máy tính\CNPM - Tai\AI_Application
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[D:/Uni/Công nghệ phần mềm/AI_Application/Views/Admin/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
+[C:/Users/taing/OneDrive/Máy tính/CNPM - Tai/AI_Application/Areas/Identity/Pages/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Uni/Công nghệ phần mềm/AI_Application/Views/GiangVien/CapNhatKienThuc.cshtml]
+[C:/Users/taing/OneDrive/Máy tính/CNPM - Tai/AI_Application/Areas/Identity/Pages/Account/Logout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/taing/OneDrive/Máy tính/CNPM - Tai/AI_Application/Areas/Identity/Pages/Account/Manage/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcX0xheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/taing/OneDrive/Máy tính/CNPM - Tai/AI_Application/Areas/Identity/Pages/Account/Manage/_ManageNav.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcX01hbmFnZU5hdi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/taing/OneDrive/Máy tính/CNPM - Tai/AI_Application/Areas/Identity/Pages/Account/Manage/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/taing/OneDrive/Máy tính/CNPM - Tai/AI_Application/Areas/Identity/Pages/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/taing/OneDrive/Máy tính/CNPM - Tai/AI_Application/Areas/Identity/Pages/Account/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfVmlld0ltcG9ydHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/taing/OneDrive/Máy tính/CNPM - Tai/AI_Application/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/taing/OneDrive/Máy tính/CNPM - Tai/AI_Application/Areas/Identity/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/taing/OneDrive/Máy tính/CNPM - Tai/AI_Application/Areas/Identity/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/taing/OneDrive/Máy tính/CNPM - Tai/AI_Application/Views/Admin/index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5caW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/taing/OneDrive/Máy tính/CNPM - Tai/AI_Application/Views/GiangVien/CapNhatKienThuc.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lhbmdWaWVuXENhcE5oYXRLaWVuVGh1Yy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Uni/Công nghệ phần mềm/AI_Application/Views/GiangVien/DanhSachCauHoi.cshtml]
+[C:/Users/taing/OneDrive/Máy tính/CNPM - Tai/AI_Application/Views/GiangVien/DanhSachCauHoi.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lhbmdWaWVuXERhbmhTYWNoQ2F1SG9pLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Uni/Công nghệ phần mềm/AI_Application/Views/GiangVien/DuyetPhanHoi.cshtml]
+[C:/Users/taing/OneDrive/Máy tính/CNPM - Tai/AI_Application/Views/GiangVien/DuyetPhanHoi.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lhbmdWaWVuXER1eWV0UGhhbkhvaS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Uni/Công nghệ phần mềm/AI_Application/Views/GiangVien/Index.cshtml]
+[C:/Users/taing/OneDrive/Máy tính/CNPM - Tai/AI_Application/Views/GiangVien/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lhbmdWaWVuXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Uni/Công nghệ phần mềm/AI_Application/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+[C:/Users/taing/OneDrive/Máy tính/CNPM - Tai/AI_Application/Views/Home/index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxpbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Uni/Công nghệ phần mềm/AI_Application/Views/Home/Privacy.cshtml]
+[C:/Users/taing/OneDrive/Máy tính/CNPM - Tai/AI_Application/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Uni/Công nghệ phần mềm/AI_Application/Views/Shared/Error.cshtml]
+[C:/Users/taing/OneDrive/Máy tính/CNPM - Tai/AI_Application/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Uni/Công nghệ phần mềm/AI_Application/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/taing/OneDrive/Máy tính/CNPM - Tai/AI_Application/Views/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/taing/OneDrive/Máy tính/CNPM - Tai/AI_Application/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Uni/Công nghệ phần mềm/AI_Application/Views/_ViewImports.cshtml]
+[C:/Users/taing/OneDrive/Máy tính/CNPM - Tai/AI_Application/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Uni/Công nghệ phần mềm/AI_Application/Views/_ViewStart.cshtml]
+[C:/Users/taing/OneDrive/Máy tính/CNPM - Tai/AI_Application/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Uni/Công nghệ phần mềm/AI_Application/Views/Shared/_Layout.cshtml]
+[C:/Users/taing/OneDrive/Máy tính/CNPM - Tai/AI_Application/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-yxud7hi30b
