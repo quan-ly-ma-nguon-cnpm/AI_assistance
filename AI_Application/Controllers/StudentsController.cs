@@ -7,6 +7,7 @@ namespace AI_Application.Controllers
 {
     public class StudentsController : Controller
     {
+        public IActionResult Index() => View();
         public IActionResult Chat() => View();
 
         public IActionResult ExplainCode() => View();

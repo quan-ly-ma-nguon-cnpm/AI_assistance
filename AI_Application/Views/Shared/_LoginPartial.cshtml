@@ -1,27 +1,94 @@
 @using Microsoft.AspNetCore.Identity
-
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
+<style>
+    .navigation {
+        display: none;
+        position: absolute;
+        border: 1px solid black;
+        top: 70px;
+        right: 10px;
+        background-color: white;
+        padding: 10px;
+        z-index: 1000;
+        min-width: 200px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .admin {
+        cursor: pointer;
+        margin: 10px;
+        padding: 5px 10px;
+        font-size: 20px;
+    }
+    .admin:hover {
+        text-decoration: underline;
+    }
+    .nav-item {
+        border: 1px solid rgb(50, 127, 222);
+        border-radius: 5px;
+        background-color: aqua;
+        margin: 5px;
+        padding: 5px;
+        list-style-type: none;
+    }
+    .nav-item a, .nav-item button {
+        display: block;
+        width: 100%;
+        text-align: left;
+        background: none;
+        border: none;
+        padding: 5px;
+    }
+</style>
+
 <ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
-    <li class="nav-item">
-        <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
-    </li>
-    <li class="nav-item">
-        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
-        </form>
-    </li>
-}
-else
-{
-    <li class="nav-item">
-        <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
-}
+    <li class="nav-item-2 admin">Admin</li>
 </ul>
+
+<div class="navigation">
+    <ul class="navbar-nav">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <li class="nav-item">
+                <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                    Hello @UserManager.GetUserName(User)!
+                </a>
+            </li>
+            <li class="nav-item">
+                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
+                </form>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+            </li>
+        }
+    </ul>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const adminButton = document.querySelector(".admin");
+        const navigation = document.querySelector(".navigation");
+        
+        if (adminButton && navigation) {
+            adminButton.addEventListener("click", () => {
+                navigation.style.display = navigation.style.display === "block" ? "none" : "block";
+            });
+            
+            // Close the navigation when clicking outside
+            document.addEventListener("click", (event) => {
+                if (!navigation.contains(event.target) && event.target !== adminButton) {
+                    navigation.style.display = "none";
+                }
+            });
+        }
+    });
+</script>
