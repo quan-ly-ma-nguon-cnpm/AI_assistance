@@ -1,6 +1,7 @@
 using AI_Application.Models.SinhVien;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace AI_Application.Controllers
 {
@@ -21,22 +22,44 @@ namespace AI_Application.Controllers
         public IActionResult UploadDocument() => View();
 
         [HttpPost]
-        public IActionResult UploadDocument(IFormFile uploadedFile)
+        public async Task<IActionResult> UploadDocument(IFormFile uploadedFile)
         {
             if (uploadedFile != null && uploadedFile.Length > 0)
             {
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", uploadedFile.FileName);
-                using (var stream = new FileStream(filePath, FileMode.Create))
+                var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(uploadedFile.FileName);
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+
+                if (!Directory.Exists(uploadsFolder))
                 {
-                    uploadedFile.CopyTo(stream);
+                    Directory.CreateDirectory(uploadsFolder);
                 }
-                ViewBag.Message = "Tải tệp lên thành công!";
+
+                var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                try
+                {
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await uploadedFile.CopyToAsync(stream);
+                    }
+                    ViewBag.Message = $"Tải tệp '{uploadedFile.FileName}' lên thành công!";
+                }
+                catch (System.Exception ex)
+                {
+                    ViewBag.Message = $"Lỗi khi tải tệp lên: {ex.Message}";
+                }
             }
             else
             {
                 ViewBag.Message = "Vui lòng chọn tệp.";
             }
 
+            return View();
+        }
+
+        public IActionResult SaveDocument()
+        {
+            ViewData["Title"] = "Lưu tài liệu";
             return View();
         }
     }
