@@ -81,26 +81,26 @@ namespace AI_Application.Controllers
         public class NewUser
         {
             [Required]
-            public required string Username { get; set; }
+            public string Username { get; set; }
 
             [Required]
             [MinLength(6)]
-            public required string Password { get; set; }
+            public string Password { get; set; }
 
             [Required]
             [RegularExpression("Student|Faculty|Admin", ErrorMessage = "Role must be Student, Faculty, or Admin")]
-            public required string Role { get; set; }
+            public string Role { get; set; }
         }
 
         public class UpdateUser
         {
             [Required]
             [MinLength(6)]
-            public required string Password { get; set; }
+            public string Password { get; set; }
 
             [Required]
             [RegularExpression("Student|Faculty|Admin", ErrorMessage = "Role must be Student, Faculty, or Admin")]
-            public required string Role { get; set; }
+            public string Role { get; set; }
         }
     }
 }
