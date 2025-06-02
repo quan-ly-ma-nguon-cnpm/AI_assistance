@@ -1,3 +1,4 @@
+using System;
 namespace AI_Application.Models.SinhVien
 {
     public class ChatMessage
