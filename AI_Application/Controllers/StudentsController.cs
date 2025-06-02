@@ -1,67 +1,31 @@
+using AI_Application.Models.SinhVien;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
 
 namespace AI_Application.Controllers
 {
-    public class StudentController : Controller
+    public class StudentsController : Controller
     {
-        // Trò chuyện với Hannah
-        public IActionResult ChatWithHannah()
-        {
-            return View();
-        }
+        public IActionResult Chat() => View();
 
-        // Chia sẻ và giải thích code
-        public IActionResult ShareAndExplainCode()
-        {
-            return View();
-        }
+        public IActionResult ExplainCode() => View();
 
-        // Hỏi về bài tập
-        public IActionResult AskAboutExercises()
-        {
-            return View();
-        }
+        public IActionResult AskExercise() => View();
 
-        // Xem tài liệu học tập
-        public IActionResult ViewLearningMaterials()
-        {
-            return View();
-        }
+        public IActionResult ViewMaterials() => View();
 
-        // Theo dõi tiến độ học tập
-        public IActionResult TrackProgress()
-        {
-            return View();
-        }
+        public IActionResult TrackProgress() => View();
 
-        // Tra cứu thông tin
-        public IActionResult LookupInformation()
-        {
-            return View();
-        }
+        public IActionResult LookupInfo() => View();
 
-        // Lưu tài liệu
-        public IActionResult SaveDocument()
-        {
-            return View();
-        }
+        public IActionResult UploadDocument() => View();
 
-        // Tải tài liệu lên (GET)
-        [HttpGet]
-        public IActionResult UploadDocument()
-        {
-            return View();
-        }
-
-        // Tải tài liệu lên (POST)
         [HttpPost]
         public IActionResult UploadDocument(IFormFile uploadedFile)
         {
             if (uploadedFile != null && uploadedFile.Length > 0)
             {
-                // Xử lý tệp được tải lên ở đây (lưu vào thư mục hoặc database)
-                // Ví dụ (lưu tạm):
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", uploadedFile.FileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", uploadedFile.FileName);
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
                     uploadedFile.CopyTo(stream);
