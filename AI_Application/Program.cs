@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using AI_Application.Data; 
+using AI_Application.Data;
 using System;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Microsoft.Extensions.Logging;
@@ -15,6 +15,7 @@ if (string.IsNullOrEmpty(connectionString))
     throw new InvalidOperationException("Connection string 'DefaultConnection' not found in appsettings.json. Please ensure it's configured correctly.");
 }
 
+// Cấu hình cho ApplicationDbContext (nếu nó không phải là IdentityDbContext)
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(connectionString,
         ServerVersion.AutoDetect(connectionString),
@@ -25,18 +26,26 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     )
 );
 
+// Cấu hình riêng cho AppIdentityDbContext nếu bạn đã tách Identity ra
+builder.Services.AddDbContext<AppIdentityDbContext>(options =>
+    options.UseMySql(connectionString,
+        ServerVersion.AutoDetect(connectionString),
+        mySqlOptions => mySqlOptions.EnableRetryOnFailure(
+            maxRetryCount: 10,
+            maxRetryDelay: TimeSpan.FromSeconds(30),
+            errorNumbersToAdd: null)
+    )
+);
+
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddRoles<IdentityRole>() 
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<AppIdentityDbContext>(); // Sử dụng AppIdentityDbContext cho Identity
 
-
-builder.Services.AddControllersWithViews(); 
-builder.Services.AddRazorPages(); 
-
+// Đã giải quyết xung đột ở đây: Chỉ giữ lại một lần AddControllersWithViews và AddRazorPages
+// và thêm AddHttpClient
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddHttpClient();
-
 
 
 var app = builder.Build();
@@ -58,7 +67,7 @@ using (var scope = app.Services.CreateScope())
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
-    
+
 }
 else
 {
@@ -70,14 +79,14 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseAuthentication(); 
-app.UseAuthorization(); 
+app.UseAuthentication();
+app.UseAuthorization();
 
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.MapRazorPages(); 
+app.MapRazorPages();
 
 app.Run();

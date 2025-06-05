@@ -17,11 +17,8 @@ namespace AI_Application.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-
-                .HasAnnotation("ProductVersion", "8.0.5")
-
+                // Giữ lại phiên bản ProductVersion mới nhất (8.0.13)
                 .HasAnnotation("ProductVersion", "8.0.13")
-
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);

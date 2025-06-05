@@ -34,7 +34,7 @@ namespace AI_Application.Controllers.API
         {
             public int QuestionId { get; set; }
             public bool IsApproved { get; set; }
-            public string Comments { get; set; }
+            public required string Comments { get; set; }
         }
     }
 }
