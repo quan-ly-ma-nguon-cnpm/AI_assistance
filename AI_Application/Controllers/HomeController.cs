@@ -1,15 +1,17 @@
+using System.Threading.Tasks;
+using AI_Application.Data;
+using AI_Application.Models;
+using AI_Application.Models.Users;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-
 namespace AI_Application.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext dbContext;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ApplicationDbContext dbContext)
         {
-            _logger = logger;
+            this.dbContext = dbContext;
         }
 
         public IActionResult Index()
@@ -22,39 +24,26 @@ namespace AI_Application.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult SendMessage(string message)
+        [HttpGet]
+        public IActionResult userlogin()
         {
-            if (string.IsNullOrEmpty(message))
-            {
-                return Json(new { success = false });
-            }
-
-            string botResponse = GetBotResponse(message);
-            _logger.LogInformation("User message: {Message}, Bot response: {Response}", message, botResponse);
-
-            return Json(new { success = true, botMessage = botResponse });
+            return View();
         }
 
-        private string GetBotResponse(string message)
+        [HttpPost]
+        public async Task<IActionResult> userlogin(UserViewModel viewModel)
         {
-            message = message.ToLower();
-            if (message.Contains("xin chào") || message.Contains("chào"))
+            var user = new Users
             {
-                return "Chào bạn! Rất vui được gặp bạn. Bạn khỏe không?";
-            }
-            else if (message.Contains("tôi khỏe") || message.Contains("khỏe"))
-            {
-                return "Tốt quá! Bạn cần tôi giúp gì hôm nay?";
-            }
-            else if (message.Contains("cảm ơn") || message.Contains("thanks"))
-            {
-                return "Không có gì! Mình luôn sẵn sàng giúp bạn.";
-            }
-            else
-            {
-                return "Mình chưa hiểu lắm, bạn có thể nói rõ hơn không?";
-            }
+                Username = viewModel.Username,
+                Password = viewModel.Password,
+                Email = viewModel.Email,
+                Role = viewModel.Role
+            };
+
+            await dbContext.Users.AddAsync(user);
+            await dbContext.SaveChangesAsync();
+            return View();
         }
     }
 }

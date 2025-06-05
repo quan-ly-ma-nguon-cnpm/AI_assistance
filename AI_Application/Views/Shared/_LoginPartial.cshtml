@@ -18,10 +18,16 @@
     .admin {
         cursor: pointer;
         margin: 10px;
-        padding: 5px 10px;
         font-size: 20px;
     }
-    .admin:hover {
+    .admin:hover{
+        font-weight: 600;
+    }
+    .login {
+        margin: 10px;
+        font-size: 20px;
+    }
+    .login:hover{
         font-weight: 600;
     }
     .nav-item {
@@ -40,10 +46,17 @@
         border: none;
         padding: 5px;
     }
+    .login-link{
+        text-decoration: none;
+        color: black;
+    }
 </style>
 
 <ul class="navbar-nav">
-    <li class="nav-item-2 admin">Admin</li>
+    <li class="login">
+        <a class="login-link" asp-area="" asp-controller="Home" asp-action="Userlogin">Login</a>
+    </li>
+    <li class="admin">Admin</li>
 </ul>
 
 <div class="navigation">
