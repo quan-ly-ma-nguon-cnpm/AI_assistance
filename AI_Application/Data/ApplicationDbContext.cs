@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity; 
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace AI_Application.Data 
+namespace AI_Application.Data
 {
     public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
@@ -10,11 +10,10 @@ namespace AI_Application.Data
             : base(options)
         {
         }
-     
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-          
         }
     }
 }
