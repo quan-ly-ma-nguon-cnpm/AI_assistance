@@ -11,13 +11,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hannah-AI (Chatbot)</title>
     <script src="https://kit.fontawesome.com/04df8ad395.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         .container {
             background-color: #fff;
             border-radius: 15px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            width: 400px;
-            max-width: 90%;
+            width: 600px;
+            max-width: 100%;
             padding: 20px;
             display: flex;
             flex-direction: column;
@@ -113,7 +114,7 @@
                     const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
                         method: "POST",
                         headers: {
-                            "Authorization": "Bearer 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",
+                            "Authorization": "Bearer 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",
                             "Content-Type": "application/json"
                         },
                         body: JSON.stringify({
@@ -124,11 +125,12 @@
 
                     const data = await res.json();
                     const answer = data.choices?.[0]?.message?.content || "No response";
+                    const html = marked.parse(answer);
 
                     // Append answer
                     const aiDiv = document.createElement('div');
                     aiDiv.className = 'answer';
-                    aiDiv.textContent = `AI: ${answer}`;
+                    aiDiv.innerHTML = `AI: ${html}`;
                     chatBox.appendChild(aiDiv);
                     chatBox.scrollTop = chatBox.scrollHeight;
 
