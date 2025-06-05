@@ -29,15 +29,15 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddRoles<IdentityRole>() 
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-<<<<<<< HEAD
+
 builder.Services.AddControllersWithViews(); 
 builder.Services.AddRazorPages(); 
-=======
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddHttpClient();
 
->>>>>>> 44f084c28d18bbf8e560f6700a2f6aacbb625299
+
 
 var app = builder.Build();
 
