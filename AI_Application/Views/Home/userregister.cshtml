@@ -85,7 +85,7 @@
 </style>
 <div class="container">
     <div class="login-container">
-        <h2>Login</h2>
+        <h2>Register</h2>
         <form method="POST">
             <div class="form-group">
                 <label for="username">Username</label>
@@ -101,9 +101,9 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required placeholder="Enter your password" asp-for="Password">
             </div>
-            <div class="from-group">
+            <div class="form-group">
+                <input type="checkbox" name="role" value="Faculty" />
                 <label for="role">Faculty</label>
-                <input type="checkbox" name="checkbox" id="chechbox" value="faculty" asp-for="Role">
             </div>
             <div class="forgot-password">
                 <a href="/forgot-password">Forgot password?</a>

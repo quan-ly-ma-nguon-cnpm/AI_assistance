@@ -25,13 +25,13 @@ namespace AI_Application.Controllers
         }
 
         [HttpGet]
-        public IActionResult userlogin()
+        public IActionResult userRegister()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> userlogin(UserViewModel viewModel)
+        public async Task<IActionResult> userRegister(UserViewModel viewModel)
         {
             var user = new Users
             {
@@ -40,6 +40,11 @@ namespace AI_Application.Controllers
                 Email = viewModel.Email,
                 Role = viewModel.Role
             };
+            
+            if (user.Role == null)
+            {
+                user.Role = "Student";
+            }
 
             await dbContext.Users.AddAsync(user);
             await dbContext.SaveChangesAsync();
