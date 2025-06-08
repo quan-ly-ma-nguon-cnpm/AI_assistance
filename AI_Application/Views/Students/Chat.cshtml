@@ -1,6 +1,11 @@
 @{
     ViewData["Title"] = "Trò chuyện với Hannah";
+
+    var builder = WebApplication.CreateBuilder();
+
+    string apiKey = builder.Configuration["API-KEYS:DeepSeek2"];
 }
+
 
 <h1>Trò chuyện với Hannah</h1>
 <p>Chào mừng bạn đến với trang trò chuyện với Hannah. Bạn có thể bắt đầu nhập tin nhắn của mình ở đây.</p>
@@ -26,6 +31,8 @@
             width: 600px;
             max-width: 100%;
             padding: 20px;
+            resize: both;
+            overflow: auto;
             display: flex;
             flex-direction: column;
         }
@@ -111,16 +118,22 @@
                 userDiv.className = 'question';
                 userDiv.textContent = `You: ${question}`;
                 chatBox.appendChild(userDiv);
+                console.log('@Html.Raw(apiKey)')
 
                 // Clear input
                 userInput.value = '';
+
+                const loadingDiv = document.createElement('div');
+                loadingDiv.className = 'answer';
+                loadingDiv.textContent = "AI: Đang suy nghĩ...";
+                chatBox.appendChild(loadingDiv);
 
                 // Send to API
                 try {
                     const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
                         method: "POST",
                         headers: {
-                            "Authorization": "Bearer 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",
+                            "Authorization": "Bearer @Html.Raw(apiKey)",
                             "Content-Type": "application/json"
                         },
                         body: JSON.stringify({
@@ -132,6 +145,8 @@
                     const data = await res.json();
                     const answer = data.choices?.[0]?.message?.content || "No response";
                     const html = marked.parse(answer);
+
+                    chatBox.removeChild(loadingDiv);
 
                     // Append answer
                     const aiDiv = document.createElement('div');
