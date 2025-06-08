@@ -22,7 +22,7 @@ public class GiangVienController : Controller
 
     public IActionResult DanhSachCauHoi()
     {
-        var danhSachCauHoi = _context.CauHois.Select(c => new CauHoiViewModel
+        var danhSachCauHoi = _context.CauHois.Select(static c => new CauHoiViewModel
         {
             Id = c.Id,
             TieuDe = c.TieuDe,

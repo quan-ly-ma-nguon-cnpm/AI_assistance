@@ -15,6 +15,20 @@
         min-width: 200px;
         box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
+    .login, .register {
+        margin: 10px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+    .login:hover, .register:hover {
+        font-weight: 600;
+    }
+
+    .login-link, .register-link {
+        text-decoration: none;
+        color: black;
+    }
+
     .admin {
         cursor: pointer;
         margin: 10px;
@@ -22,14 +36,7 @@
     }
     .admin:hover{
         font-weight: 600;
-    }
-    .login {
-        margin: 10px;
-        font-size: 20px;
-    }
-    .login:hover{
-        font-weight: 600;
-    }
+    } 
     .nav-item {
         border: 1px solid rgb(50, 127, 222);
         border-radius: 5px;
@@ -46,15 +53,14 @@
         border: none;
         padding: 5px;
     }
-    .login-link{
-        text-decoration: none;
-        color: black;
-    }
 </style>
 
 <ul class="navbar-nav">
     <li class="login">
-        <a class="login-link" asp-area="" asp-controller="Home" asp-action="Userregister">Register</a>
+        <a class="login-link" asp-area="" asp-controller="Home" asp-action="Userlogin">Login</a>
+    </li>
+    <li class="register">
+        <a class="register-link" asp-area="" asp-controller="Home" asp-action="Userregister">Register</a>
     </li>
     <li class="admin">Admin</li>
 </ul>
