@@ -46,8 +46,13 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddHttpClient();
-builder.Services.AddSession();
-
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(1);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true; 
+});
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
@@ -83,11 +88,14 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseSession();
 
+app.MapDefaultControllerRoute();
+
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+app.MapDefaultControllerRoute();
 app.MapRazorPages();
 
 app.Run();

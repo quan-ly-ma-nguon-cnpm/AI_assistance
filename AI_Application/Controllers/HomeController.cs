@@ -85,17 +85,37 @@ namespace AI_Application.Controllers
             var user = await dbContext.Users
             .Where(u => u.Email == viewModel.Email || u.Username == viewModel.Username)
             .FirstOrDefaultAsync();
-            if (user != null)
+            if (user != null && user.Role == "Student")
             {
                 HttpContext.Session.SetString("Username", user.Username);
-                HttpContext.Session.SetString("Passwword", user.Password);
                 HttpContext.Session.SetString("UserId", user.Id.ToString());
 
                 return Redirect("/Students/Index");
             }
+            else if (user != null && user.Role == "Faculty")
+            {
+                HttpContext.Session.SetString("Username", user.Username);
+                HttpContext.Session.SetString("UserId", user.Id.ToString());
+
+                return Redirect("/GiangVien/Index");
+            }
 
             ViewBag.register_message = "Không thể đăng nhập";
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            var user = await dbContext.Users
+            .Where(u => u.Username == HttpContext.Session.GetString("Username"))
+            .FirstOrDefaultAsync();
+
+            HttpContext.Session.Remove("Username");
+            HttpContext.Session.Remove("UserId");
+
+            TempData["LogoutMessage"] = "Bạn đã đăng xuất thành công!";
+            return RedirectToAction("Index", "Home");
         }
     }
 }

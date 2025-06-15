@@ -1,69 +1,93 @@
-@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@using Microsoft.AspNetCore.Identity  
+@using Microsoft.AspNetCore.Mvc;  
+@using Microsoft.AspNetCore.Http;  
+@inject IHttpContextAccessor HttpContextAccessor  
+@inject SignInManager<IdentityUser> SignInManager  
+@inject UserManager<IdentityUser> UserManager  
 
-<style>
-    .navigation {
-        display: none;
-        position: absolute;
-        border: 1px solid black;
-        top: 70px;
-        right: 10px;
-        background-color: white;
-        padding: 10px;
-        z-index: 1000;
-        min-width: 200px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
-    .login, .register {
-        margin: 10px;
+@{  
+    var user_Id = HttpContextAccessor.HttpContext?.Session?.GetString("User_Id");   
+    var username = HttpContextAccessor.HttpContext?.Session?.GetString("Username");
+}  
+<style>  
+    .navigation {  
+        display: none;  
+        position: absolute;  
+        border: 1px solid black;  
+        top: 70px;  
+        right: 10px;  
+        background-color: white;  
+        padding: 10px;  
+        z-index: 1000;  
+        min-width: 200px;  
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);  
+    }  
+    .login, .register {  
+        margin: 10px;  
         font-size: 20px;
-        cursor: pointer;
-    }
-    .login:hover, .register:hover {
-        font-weight: 600;
-    }
-
-    .login-link, .register-link {
-        text-decoration: none;
+        text-decoration: none;  
         color: black;
-    }
+        cursor: pointer;  
+    }  
+    .login:hover, .register:hover {  
+        font-weight: 600;  
+    }  
 
-    .admin {
-        cursor: pointer;
-        margin: 10px;
-        font-size: 20px;
+    .login-link, .register-link {  
+        text-decoration: none;  
+        color: black;  
+    }  
+
+    .admin {  
+        cursor: pointer;  
+        margin: 10px;  
+        font-size: 20px;  
+    }  
+    .admin:hover{  
+        font-weight: 600;  
+    }   
+    .nav-item {  
+        border: 1px solid rgb(50, 127, 222);  
+        border-radius: 5px;  
+        background-color: aqua;  
+        margin: 5px;  
+        padding: 5px;  
+        list-style-type: none;  
+    }  
+    .nav-item a, .nav-item button {  
+        display: block;  
+        width: 100%;  
+        text-align: left;  
+        background: none;  
+        border: none;  
+        padding: 5px;  
+    }  
+    .user-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
-    .admin:hover{
-        font-weight: 600;
-    } 
-    .nav-item {
-        border: 1px solid rgb(50, 127, 222);
-        border-radius: 5px;
-        background-color: aqua;
-        margin: 5px;
-        padding: 5px;
-        list-style-type: none;
+    .user-name {
+        font-weight: bold;
+        color: #333;
     }
-    .nav-item a, .nav-item button {
-        display: block;
-        width: 100%;
-        text-align: left;
+    .logout-btn {
         background: none;
         border: none;
-        padding: 5px;
+        color: #000000;
+        cursor: pointer;
+        text-decoration: underline;
+        padding: 0;
     }
-</style>
-
-<ul class="navbar-nav">
-    <li class="login">
-        <a class="login-link" asp-area="" asp-controller="Home" asp-action="Userlogin">Login</a>
-    </li>
-    <li class="register">
-        <a class="register-link" asp-area="" asp-controller="Home" asp-action="Userregister">Register</a>
-    </li>
-    <li class="admin">Admin</li>
-</ul>
+    .login-link, .register-link {
+        margin-right: 10px;
+        color: #000000;
+        text-decoration: none;
+    }
+    .login-link:hover, .register-link:hover {
+        font-weight: 600;
+    }
+    </style>  
 
 <div class="navigation">
     <ul class="navbar-nav">
@@ -92,22 +116,59 @@
     </ul>
 </div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const adminButton = document.querySelector(".admin");
-        const navigation = document.querySelector(".navigation");
-        
-        if (adminButton && navigation) {
-            adminButton.addEventListener("click", () => {
-                navigation.style.display = navigation.style.display === "block" ? "none" : "block";
-            });
-            
-            // Close the navigation when clicking outside
-            document.addEventListener("click", (event) => {
-                if (!navigation.contains(event.target) && event.target !== adminButton) {
-                    navigation.style.display = "none";
-                }
-            });
+<div class="user-info">
+    @if (!string.IsNullOrEmpty(username))
+    {
+        <span class="user-name">
+            Hello, @username!
+        </span>
+        <form asp-controller="Home" asp-action="Logout" method="post" style="display:inline;">
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    }
+    else
+    {
+        @if (SignInManager.IsSignedIn(User)) {
+            <li class="nav-item">
+                <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                    Hello @UserManager.GetUserName(User)!
+                </a>
+            </li>
+            <li class="nav-item">
+                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
+                </form>
+            </li>
+        }else{
+            <ul class="navbar-nav">
+                <li class="login">
+                    <a class="login-link" asp-area="" asp-controller="Home" asp-action="Userlogin">Login</a>
+                </li>
+                <li class="register">
+                    <a class="register-link" asp-area="" asp-controller="Home" asp-action="Userregister">Register</a>
+                </li>
+                <li class="admin">Admin</li>
+            </ul>
         }
-    });
+    }
+</div>
+
+<script>  
+    document.addEventListener("DOMContentLoaded", () => {  
+        const adminButton = document.querySelector(".admin");  
+        const navigation = document.querySelector(".navigation");  
+          
+        if (adminButton && navigation) {  
+            adminButton.addEventListener("click", () => {  
+                navigation.style.display = navigation.style.display === "block" ? "none" : "block";  
+            });  
+              
+            // Close the navigation when clicking outside  
+            document.addEventListener("click", (event) => {  
+                if (!navigation.contains(event.target) && event.target !== adminButton) {  
+                    navigation.style.display = "none";  
+                }  
+            });  
+        }  
+    });  
 </script>
