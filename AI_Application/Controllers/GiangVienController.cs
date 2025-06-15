@@ -22,7 +22,8 @@ public class GiangVienController : Controller
 
     public IActionResult DanhSachCauHoi()
     {
-        var danhSachCauHoi = _context.CauHois.Select(static c => new CauHoiViewModel
+#pragma warning disable CS8601 // Possible null reference assignment.
+        List<CauHoiViewModel> DanhSachCauHoi = _context.CauHois.Select(static c => new CauHoiViewModel
         {
             Id = c.Id,
             TieuDe = c.TieuDe,
@@ -31,12 +32,48 @@ public class GiangVienController : Controller
             NguoiGui = c.NguoiGui,
             DaDuyet = c.DaDuyet
         }).ToList();
+#pragma warning restore CS8601 // Possible null reference assignment.
 
-        return View(danhSachCauHoi);
+        return View(DanhSachCauHoi);
     }
 
     public IActionResult DuyetPhanHoi()
     {
-        return View();
+        // Lấy danh sách phản hồi từ database
+        // Giả sử bạn có một DbSet<PhanHoi> trong ApplicationDbContext của mình
+        List<PhanHoiViewModel> danhSachPhanHoi = _context.PhanHois!
+            .Select(p => new PhanHoiViewModel // Ánh xạ từ entity PhanHoi sang ViewModel
+            {
+                Id = p.Id,
+                NoiDung = p.NoiDung,
+                TieuDe = p.TieuDe,
+                LinhVuc = p.LinhVuc,
+                NgayTao = p.NgayTao,
+                NguoiGui = p.NguoiGui, // Đảm bảo thuộc tính này tồn tại trong entity PhanHoi của bạn
+                ThoiGianGui = p.ThoiGianGui,
+                DaDuyet = p.DaDuyet
+            })
+            .ToList();
+
+        // **Quan trọng:**
+        // Nếu _context.PhanHois không có dữ liệu, .ToList() sẽ trả về một danh sách rỗng (empty list),
+        // chứ không phải null. Vì vậy, bạn không cần phải kiểm tra null ở đây.
+
+        return View(danhSachPhanHoi); // Truyền danh sách phản hồi vào View
+    }
+
+    // Bạn cũng sẽ cần một Post action để xử lý việc duyệt phản hồi
+    [HttpPost]
+    public IActionResult DuyetPhanHoi(int id)
+    {
+        var phanHoiToUpdate = _context.PhanHois.Find(id); // Tìm phản hồi theo ID
+
+        if (phanHoiToUpdate != null)
+        {
+            phanHoiToUpdate.DaDuyet = true; // Đặt trạng thái đã duyệt
+            _context.SaveChanges(); // Lưu thay đổi vào database
+        }
+
+        return RedirectToAction(nameof(DuyetPhanHoi)); // Chuyển hướng về trang danh sách để cập nhật hiển thị
     }
 }

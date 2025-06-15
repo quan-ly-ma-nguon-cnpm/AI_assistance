@@ -16,6 +16,8 @@ namespace AI_Application.Data
 
         public DbSet<Users> Users { get; set; }
         public DbSet<CauHoi> CauHois { get; set; }
+        public DbSet<PhanHoi> PhanHois { get; set; } = null!;
+
 
 
         protected override void OnModelCreating(ModelBuilder builder)
