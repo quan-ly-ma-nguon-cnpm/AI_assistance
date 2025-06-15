@@ -88,6 +88,7 @@ namespace AI_Application.Controllers
             if (user != null && user.Role == "Student")
             {
                 HttpContext.Session.SetString("Username", user.Username);
+                HttpContext.Session.SetString("Role", user.Role);
                 HttpContext.Session.SetString("UserId", user.Id.ToString());
 
                 return Redirect("/Students/Index");
@@ -95,6 +96,7 @@ namespace AI_Application.Controllers
             else if (user != null && user.Role == "Faculty")
             {
                 HttpContext.Session.SetString("Username", user.Username);
+                 HttpContext.Session.SetString("Role", user.Role);
                 HttpContext.Session.SetString("UserId", user.Id.ToString());
 
                 return Redirect("/GiangVien/Index");
