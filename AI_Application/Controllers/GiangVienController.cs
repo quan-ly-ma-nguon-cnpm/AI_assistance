@@ -75,4 +75,5 @@ public class GiangVienController : Controller
 
         return RedirectToAction(nameof(DuyetPhanHoi)); // Chuyển hướng về trang danh sách để cập nhật hiển thị
     }
+    
 }

@@ -17,11 +17,420 @@ namespace AI_Application.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                // Giữ lại phiên bản ProductVersion mới nhất (8.0.13)
                 .HasAnnotation("ProductVersion", "8.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
+
+            modelBuilder.Entity("AI_Application.Models.CauHoi", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("DaDuyet")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("LinhVuc")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("NgayTao")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("NguoiGui")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("NoiDung")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("ThoiGianGui")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("TieuDe")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CauHois");
+                });
+
+            modelBuilder.Entity("AI_Application.Models.PhanHoi", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CauHoiId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("DaDuyet")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("LinhVuc")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("NgayTao")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("NguoiGui")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("NguoiNhan")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("NoiDung")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("ThoiGianGui")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("TieuDe")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CauHoiId");
+
+                    b.ToTable("PhanHois");
+                });
+
+            modelBuilder.Entity("AI_Application.Models.PhanHoiCauHoi", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CauHoiId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("DaDuyet")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("NguoiGui")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("NguoiNhan")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("NoiDung")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("ThoiGianPhanHoi")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CauHoiId");
+
+                    b.ToTable("PhanHoiCauHois");
+                });
+
+            modelBuilder.Entity("AI_Application.Models.SinhVien.ChatMessage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Response")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("SentAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ChatMessages");
+                });
+
+            modelBuilder.Entity("AI_Application.Models.SinhVien.CodeExplanation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Explanation")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("RequestedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CodeExplanations");
+                });
+
+            modelBuilder.Entity("AI_Application.Models.SinhVien.Document", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Documents");
+                });
+
+            modelBuilder.Entity("AI_Application.Models.SinhVien.ExerciseQuestion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Answer")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("AskedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Question")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ExerciseQuestions");
+                });
+
+            modelBuilder.Entity("AI_Application.Models.SinhVien.InformationLookup", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Query")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Result")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("SearchedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("StudentId")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("InformationLookups");
+                });
+
+            modelBuilder.Entity("AI_Application.Models.SinhVien.LearningMaterial", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UploadedBy")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LearningMaterials");
+                });
+
+            modelBuilder.Entity("AI_Application.Models.SinhVien.LearningProgress", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Activity")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<double>("CompletionPercentage")
+                        .HasColumnType("double");
+
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("StudentId")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LearningProgresses");
+                });
+
+            modelBuilder.Entity("AI_Application.Models.SinhVien.SavedDocument", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("SavedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("StudentId")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SavedDocuments");
+                });
+
+            modelBuilder.Entity("AI_Application.Models.SinhVien.UploadedDocument", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("StudentId")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("UploadedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UploadedDocuments");
+                });
+
+            modelBuilder.Entity("AI_Application.Models.Users.Users", b =>
+                {
+                    b.Property<string>("Username")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Username");
+
+                    b.HasIndex("Username")
+                        .IsUnique();
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("AI_Application.Models.Users.Users_Information", b =>
+                {
+                    b.Property<string>("Username")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ColleagueID")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid>("ID")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("MediaLinked")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Username");
+
+                    b.ToTable("UsersInformation");
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -223,6 +632,39 @@ namespace AI_Application.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("AI_Application.Models.PhanHoi", b =>
+                {
+                    b.HasOne("AI_Application.Models.CauHoi", "CauHoi")
+                        .WithMany()
+                        .HasForeignKey("CauHoiId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CauHoi");
+                });
+
+            modelBuilder.Entity("AI_Application.Models.PhanHoiCauHoi", b =>
+                {
+                    b.HasOne("AI_Application.Models.CauHoi", "CauHoi")
+                        .WithMany("PhanHois")
+                        .HasForeignKey("CauHoiId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CauHoi");
+                });
+
+            modelBuilder.Entity("AI_Application.Models.Users.Users_Information", b =>
+                {
+                    b.HasOne("AI_Application.Models.Users.Users", "User")
+                        .WithOne("UsersInformation")
+                        .HasForeignKey("AI_Application.Models.Users.Users_Information", "Username")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -272,6 +714,16 @@ namespace AI_Application.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("AI_Application.Models.CauHoi", b =>
+                {
+                    b.Navigation("PhanHois");
+                });
+
+            modelBuilder.Entity("AI_Application.Models.Users.Users", b =>
+                {
+                    b.Navigation("UsersInformation");
                 });
 #pragma warning restore 612, 618
         }

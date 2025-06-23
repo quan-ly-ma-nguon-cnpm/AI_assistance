@@ -1,4 +1,6 @@
-﻿namespace AI_Application.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace AI_Application.Models
 {
     public class PhanHoi // ← THÊM từ khóa public ở đây
     {
@@ -10,5 +12,11 @@
         public DateTime NgayTao { get; set; }
         public DateTime ThoiGianGui { get; set; }
         public bool DaDuyet { get; set; }
+        public string? NguoiNhan { get; internal set; }
+        public int CauHoiId { get; set; } 
+        public CauHoi? CauHoi { get; set; } 
+
+        [NotMapped]
+        public object? ThoiGianPhanHoi { get; internal set; }
     }
 }

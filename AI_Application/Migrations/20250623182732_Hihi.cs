@@ -5,7 +5,7 @@
 namespace AI_Application.Migrations
 {
     /// <inheritdoc />
-    public partial class AddNoiDung_ThoiGianGui : Migration
+    public partial class Hihi : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

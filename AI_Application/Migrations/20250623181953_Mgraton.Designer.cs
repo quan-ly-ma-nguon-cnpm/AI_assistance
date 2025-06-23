@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AI_Application.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250623164452_AddUserRelationship")]
-    partial class AddUserRelationship
+    [Migration("20250623181953_Mgraton")]
+    partial class Mgraton
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -67,6 +67,9 @@ namespace AI_Application.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CauHoiId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("DaDuyet")
                         .HasColumnType("tinyint(1)");
 
@@ -79,6 +82,9 @@ namespace AI_Application.Migrations
 
                     b.Property<string>("NguoiGui")
                         .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("NguoiNhan")
                         .HasColumnType("longtext");
 
                     b.Property<string>("NoiDung")
@@ -94,7 +100,45 @@ namespace AI_Application.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CauHoiId");
+
                     b.ToTable("PhanHois");
+                });
+
+            modelBuilder.Entity("AI_Application.Models.PhanHoiCauHoi", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CauHoiId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("DaDuyet")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("NguoiGui")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("NguoiNhan")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("NoiDung")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("ThoiGianPhanHoi")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CauHoiId");
+
+                    b.ToTable("PhanHoiCauHois");
                 });
 
             modelBuilder.Entity("AI_Application.Models.SinhVien.ChatMessage", b =>
@@ -332,13 +376,15 @@ namespace AI_Application.Migrations
 
             modelBuilder.Entity("AI_Application.Models.Users.Users", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                    b.Property<string>("Username")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -348,19 +394,18 @@ namespace AI_Application.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.HasKey("Username");
 
-                    b.HasKey("Id");
+                    b.HasIndex("Username")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
 
             modelBuilder.Entity("AI_Application.Models.Users.Users_Information", b =>
                 {
-                    b.Property<Guid>("ID")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("Username")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -374,6 +419,9 @@ namespace AI_Application.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<Guid>("ID")
+                        .HasColumnType("char(36)");
+
                     b.Property<string>("MediaLinked")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -382,7 +430,7 @@ namespace AI_Application.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.HasKey("ID");
+                    b.HasKey("Username");
 
                     b.ToTable("UsersInformation");
                 });
@@ -587,11 +635,33 @@ namespace AI_Application.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("AI_Application.Models.PhanHoi", b =>
+                {
+                    b.HasOne("AI_Application.Models.CauHoi", "CauHoi")
+                        .WithMany()
+                        .HasForeignKey("CauHoiId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CauHoi");
+                });
+
+            modelBuilder.Entity("AI_Application.Models.PhanHoiCauHoi", b =>
+                {
+                    b.HasOne("AI_Application.Models.CauHoi", "CauHoi")
+                        .WithMany("PhanHois")
+                        .HasForeignKey("CauHoiId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CauHoi");
+                });
+
             modelBuilder.Entity("AI_Application.Models.Users.Users_Information", b =>
                 {
                     b.HasOne("AI_Application.Models.Users.Users", "User")
                         .WithOne("UsersInformation")
-                        .HasForeignKey("AI_Application.Models.Users.Users_Information", "ID")
+                        .HasForeignKey("AI_Application.Models.Users.Users_Information", "Username")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -647,6 +717,11 @@ namespace AI_Application.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("AI_Application.Models.CauHoi", b =>
+                {
+                    b.Navigation("PhanHois");
                 });
 
             modelBuilder.Entity("AI_Application.Models.Users.Users", b =>

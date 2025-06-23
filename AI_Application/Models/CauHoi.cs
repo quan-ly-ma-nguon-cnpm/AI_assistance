@@ -10,5 +10,6 @@ namespace AI_Application.Models
         public bool DaDuyet { get; set; }
         public string? NoiDung { get; set; } = string.Empty;
         public DateTime ThoiGianGui { get; set; }
+        public List<PhanHoiCauHoi>? PhanHois { get; set; }
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AI_Application.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250623173856_AddUserRelationship2")]
-    partial class AddUserRelationship2
+    [Migration("20250623175153_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -95,6 +95,42 @@ namespace AI_Application.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PhanHois");
+                });
+
+            modelBuilder.Entity("AI_Application.Models.PhanHoiCauHoi", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CauHoiId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("DaDuyet")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("NguoiGui")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("NguoiNhan")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("NoiDung")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("ThoiGianPhanHoi")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CauHoiId");
+
+                    b.ToTable("PhanHoiCauHois");
                 });
 
             modelBuilder.Entity("AI_Application.Models.SinhVien.ChatMessage", b =>
@@ -591,6 +627,17 @@ namespace AI_Application.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("AI_Application.Models.PhanHoiCauHoi", b =>
+                {
+                    b.HasOne("AI_Application.Models.CauHoi", "CauHoi")
+                        .WithMany("PhanHois")
+                        .HasForeignKey("CauHoiId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CauHoi");
+                });
+
             modelBuilder.Entity("AI_Application.Models.Users.Users_Information", b =>
                 {
                     b.HasOne("AI_Application.Models.Users.Users", "User")
@@ -651,6 +698,11 @@ namespace AI_Application.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("AI_Application.Models.CauHoi", b =>
+                {
+                    b.Navigation("PhanHois");
                 });
 
             modelBuilder.Entity("AI_Application.Models.Users.Users", b =>
