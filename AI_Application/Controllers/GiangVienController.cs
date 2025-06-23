@@ -39,17 +39,16 @@ public class GiangVienController : Controller
 
     public IActionResult DuyetPhanHoi()
     {
-        // Lấy danh sách phản hồi từ database
-        // Giả sử bạn có một DbSet<PhanHoi> trong ApplicationDbContext của mình
+        
         List<PhanHoiViewModel> danhSachPhanHoi = _context.PhanHois!
-            .Select(p => new PhanHoiViewModel // Ánh xạ từ entity PhanHoi sang ViewModel
+            .Select(p => new PhanHoiViewModel 
             {
                 Id = p.Id,
                 NoiDung = p.NoiDung,
                 TieuDe = p.TieuDe,
                 LinhVuc = p.LinhVuc,
                 NgayTao = p.NgayTao,
-                NguoiGui = p.NguoiGui, // Đảm bảo thuộc tính này tồn tại trong entity PhanHoi của bạn
+                NguoiGui = p.NguoiGui, 
                 ThoiGianGui = p.ThoiGianGui,
                 DaDuyet = p.DaDuyet
             })
