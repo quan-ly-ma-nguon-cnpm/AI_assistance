@@ -1,0 +1,42 @@
+@model List<AI_Application.Models.PhanHoiCauHoi>
+@{
+    ViewData["Title"] = "Duyệt phản hồi từ giảng viên";
+}
+
+<h2>Phản hồi chưa được duyệt</h2>
+
+@if (!Model.Any())
+{
+    <p>Không có phản hồi nào đang chờ duyệt.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Sinh viên</th>
+                <th>Mã Câu hỏi</th>
+                <th>Nội dung phản hồi</th>
+                <th>Thời gian</th>
+                <th>Duyệt</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.NguoiNhan</td>
+                <td>@item.CauHoiId</td>
+                <td>@item.NoiDung</td>
+                <td>@item.ThoiGianPhanHoi.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>
+                    <form asp-action="Duyet" asp-controller="Lecturers" method="post">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <button type="submit" class="btn btn-success btn-sm">✔ Duyệt</button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

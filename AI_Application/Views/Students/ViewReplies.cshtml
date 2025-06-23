@@ -1,38 +1,32 @@
 @model List<AI_Application.Models.PhanHoiCauHoi>
 
-@{
-    ViewData["Title"] = "Phản hồi từ giảng viên";
-}
+<h2>Phản hồi từ giảng viên</h2>
 
-<h2 class="mt-4 mb-4 text-center text-primary">Phản hồi từ giảng viên</h2>
-
-@if (Model == null || !Model.Any())
+@if (!Model.Any())
 {
-    <div class="alert alert-info text-center">
-        Hiện chưa có phản hồi nào.
-    </div>
+    <p>Không có phản hồi nào.</p>
 }
 else
 {
-    <table class="table table-bordered table-hover">
-        <thead class="thead-dark">
+    <table class="table table-bordered">
+        <thead>
             <tr>
-                <th style="width: 30%;">Tiêu đề câu hỏi</th>
-                <th>Nội dung phản hồi</th>
-                <th style="width: 15%;">Giảng viên</th>
-                <th style="width: 20%;">Thời gian phản hồi</th>
+                <th>Câu hỏi</th>
+                <th>Phản hồi</th>
+                <th>Giảng viên</th>
+                <th>Thời gian</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.CauHoi?.TieuDe</td>
-                    <td>@item.NoiDung</td>
-                    <td>@item.NguoiGui</td>
-                    <td>@item.ThoiGianPhanHoi.ToString("dd/MM/yyyy HH:mm")</td>
-                </tr>
-            }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.CauHoi?.NoiDung</td>
+                <td>@item.NoiDung</td>
+                <td>@item.NguoiGui</td>
+                <td>@item.ThoiGianPhanHoi.ToString("dd/MM/yyyy HH:mm")</td>
+            </tr>
+        }
         </tbody>
     </table>
 }

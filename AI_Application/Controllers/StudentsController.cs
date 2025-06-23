@@ -2,8 +2,10 @@ using AI_Application.Models.SinhVien;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Threading.Tasks;
-using AI_Application.Data; 
+using AI_Application.Data;
 using Microsoft.EntityFrameworkCore;
+using AI_Application.Models;
+
 
 
 namespace AI_Application.Controllers
@@ -72,16 +74,33 @@ namespace AI_Application.Controllers
             ViewData["Title"] = "Lưu tài liệu";
             return View();
         }
+        [HttpPost]
+        public IActionResult AskExercise(CauHoi model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.NgayTao = DateTime.Now;
+                model.NguoiGui = User.Identity?.Name ?? "SinhVien";
+                model.DaDuyet = false;
+
+                _context.CauHois.Add(model);
+                _context.SaveChanges();
+
+                TempData["Success"] = "Gửi câu hỏi thành công!";
+                return RedirectToAction("AskExercise");
+            }
+            return View(model);
+        }
         public IActionResult ViewReplies()
         {
             var tenSinhVien = User.Identity?.Name ?? "SinhVien";
             var replies = _context.PhanHoiCauHois
-            .Where(p => p.NguoiNhan == tenSinhVien)
+            .Where(p => p.NguoiNhan == tenSinhVien == p.DaDuyet)
             .Include(p => p.CauHoi)
             .OrderByDescending(p => p.ThoiGianPhanHoi)
             .ToList();
             return View(replies); // Truyền danh sách phản hồi sang View
-            
+
         }
     }
 }
