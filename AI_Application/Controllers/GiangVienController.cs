@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using AI_Application.Data; // ApplicationDbContext
 using AI_Application.Models; // CauHoi, CauHoiViewModel
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+
 
 public class GiangVienController : Controller
 {
@@ -11,19 +13,30 @@ public class GiangVienController : Controller
     {
         _context = context;
     }
+
     public IActionResult Index()
     {
-        return View(); 
+        return View();
     }
+
     public IActionResult CapNhatKienThuc()
     {
         return View();
     }
 
+    public IActionResult DanhSachCauHoiChuaPhanHoi()
+    {
+        var cauHois = _context.CauHois
+            .Where(c => !_context.PhanHoiCauHois.Any(p => p.CauHoiId == c.Id))
+            .ToList();
+
+        return View("DanhSachCauHoi", cauHois); // Dùng cùng View "DanhSachCauHoi"
+    }
+
     public IActionResult DanhSachCauHoi()
     {
 #pragma warning disable CS8601 // Possible null reference assignment.
-        List<CauHoiViewModel> DanhSachCauHoi = _context.CauHois.Select(static c => new CauHoiViewModel
+        List<CauHoiViewModel> danhSach = _context.CauHois.Select(static c => new CauHoiViewModel
         {
             Id = c.Id,
             TieuDe = c.TieuDe,
@@ -34,46 +47,62 @@ public class GiangVienController : Controller
         }).ToList();
 #pragma warning restore CS8601 // Possible null reference assignment.
 
-        return View(DanhSachCauHoi);
+        return View(danhSach);
     }
 
     public IActionResult DuyetPhanHoi()
     {
-        
-        List<PhanHoiViewModel> danhSachPhanHoi = _context.PhanHois!
-            .Select(p => new PhanHoiViewModel 
+        var danhSachPhanHoi = _context.PhanHoiCauHois
+        .Include(p => p.CauHoi)
+            .Select(static p => new PhanHoiViewModel
             {
                 Id = p.Id,
                 NoiDung = p.NoiDung,
-                TieuDe = p.TieuDe,
-                LinhVuc = p.LinhVuc,
-                NgayTao = p.NgayTao,
-                NguoiGui = p.NguoiGui, 
-                ThoiGianGui = p.ThoiGianGui,
+                TieuDe = p.CauHoi.TieuDe,
+                LinhVuc = p.CauHoi.LinhVuc,
+                NgayTao = p.CauHoi.NgayTao,
+                NguoiGui = p.NguoiGui,
+                ThoiGianGui = p.ThoiGianPhanHoi,
                 DaDuyet = p.DaDuyet
             })
             .ToList();
 
-        // **Quan trọng:**
-        // Nếu _context.PhanHois không có dữ liệu, .ToList() sẽ trả về một danh sách rỗng (empty list),
-        // chứ không phải null. Vì vậy, bạn không cần phải kiểm tra null ở đây.
-
-        return View(danhSachPhanHoi); // Truyền danh sách phản hồi vào View
+        return View(danhSachPhanHoi);
     }
 
-    // Bạn cũng sẽ cần một Post action để xử lý việc duyệt phản hồi
     [HttpPost]
     public IActionResult DuyetPhanHoi(int id)
     {
-        var phanHoiToUpdate = _context.PhanHois.Find(id); // Tìm phản hồi theo ID
+        var phanHoiToUpdate = _context.PhanHoiCauHois.Find(id);
 
         if (phanHoiToUpdate != null)
         {
-            phanHoiToUpdate.DaDuyet = true; // Đặt trạng thái đã duyệt
-            _context.SaveChanges(); // Lưu thay đổi vào database
+            phanHoiToUpdate.DaDuyet = true;
+            _context.SaveChanges();
         }
 
-        return RedirectToAction(nameof(DuyetPhanHoi)); // Chuyển hướng về trang danh sách để cập nhật hiển thị
+        return RedirectToAction(nameof(DuyetPhanHoi));
     }
-    
+
+    [HttpPost]
+    public IActionResult GuiPhanHoi(int cauHoiId, string noiDung)
+    {
+        var cauHoi = _context.CauHois.FirstOrDefault(c => c.Id == cauHoiId);
+        if (cauHoi == null) return NotFound();
+
+        var ph = new PhanHoiCauHoi
+        {
+            CauHoiId = cauHoiId,
+            NoiDung = noiDung,
+            NguoiGui = User.Identity?.Name ?? "GiangVien",
+            NguoiNhan = cauHoi.NguoiGui,
+            ThoiGianPhanHoi = DateTime.Now,
+            DaDuyet = true
+        };
+
+        _context.PhanHoiCauHois.Add(ph);
+        _context.SaveChanges();
+
+        return RedirectToAction("DanhSachCauHoiChuaPhanHoi");
+    }
 }

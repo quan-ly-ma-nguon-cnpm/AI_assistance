@@ -1,37 +1,42 @@
 @model List<AI_Application.Models.CauHoiViewModel>
 
 @{
-    ViewData["Title"] = "Danh sách câu hỏi";
+    ViewData["Title"] = "Danh sách câu hỏi từ sinh viên";
 }
 
-<h2>Danh sách câu hỏi</h2>
+<h2>Danh sách câu hỏi từ sinh viên</h2>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Tiêu đề</th>
-            <th>Lĩnh vực</th>
-            <th>Ngày tạo</th>
-            <th>Người gửi</th>
-            <th>Trạng thái</th>
-            <th>Hành động</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var cauHoi in Model)
-        {
+@if (!Model.Any())
+{
+    <p>Hiện chưa có câu hỏi nào.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
             <tr>
-                <td>@cauHoi.TieuDe</td>
-                <td>@cauHoi.LinhVuc</td>
-                <td>@cauHoi.NgayTao.ToString("dd/MM/yyyy")</td>
-                <td>@cauHoi.NguoiGui</td>
-                <td>
-                    @(cauHoi.DaDuyet ? "Đã duyệt" : "Chưa duyệt")
-                </td>
-                <td>
-                    <a class="btn btn-primary" asp-controller="GiangVien" asp-action="ChiTietCauHoi" asp-route-id="@cauHoi.Id">Chi tiết</a>
-                </td>
+                <th>Sinh viên</th>
+                <th>Câu hỏi</th>
+                <th>Thời gian</th>
+                <th>Phản hồi</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var cauHoi in Model)
+            {
+                <tr>
+                    <td>@cauHoi.NguoiGui</td>
+                    <td>@cauHoi.NoiDung</td>
+                    <td>@(cauHoi.ThoiGianDat?.ToString("dd/MM/yyyy HH:mm"))</td>
+                    <td>
+                        <form asp-action="GuiPhanHoi" method="post">
+                            <input type="hidden" name="cauHoiId" value="@cauHoi.Id" />
+                            <textarea name="noiDung" rows="2" class="form-control" placeholder="Nhập phản hồi..."></textarea>
+                            <button type="submit" class="btn btn-sm btn-primary mt-1">Gửi</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
