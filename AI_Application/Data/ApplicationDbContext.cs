@@ -29,10 +29,20 @@ namespace AI_Application.Data
         public DbSet<Document> Documents { get; set; } = default!;
         public DbSet<UploadedDocument> UploadedDocuments { get; set; } = default!;
         public DbSet<SavedDocument> SavedDocuments { get; set; } = default!;
+        public DbSet<Users_Information> UsersInformation { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<Users>()
+                .HasIndex(u => u.Username)
+                .IsUnique();
+
+            builder.Entity<Users_Information>()
+                .HasOne(ui => ui.User)
+                .WithOne(u => u.UsersInformation)
+                .HasForeignKey<Users_Information>(ui => ui.Username)
+                .HasPrincipalKey<Users>(u => u.Username);
         }
     }
 }

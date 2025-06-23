@@ -5,6 +5,7 @@ using AI_Application.Models.Users;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Elfie.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using NuGet.Protocol.Core.Types;
@@ -96,7 +97,7 @@ namespace AI_Application.Controllers
             else if (user != null && user.Role == "Faculty")
             {
                 HttpContext.Session.SetString("Username", user.Username);
-                 HttpContext.Session.SetString("Role", user.Role);
+                HttpContext.Session.SetString("Role", user.Role);
                 HttpContext.Session.SetString("UserId", user.Id.ToString());
 
                 return Redirect("/GiangVien/Index");
@@ -119,5 +120,73 @@ namespace AI_Application.Controllers
             TempData["LogoutMessage"] = "Bạn đã đăng xuất thành công!";
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpGet]
+        public IActionResult userdetail()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> userinformation()
+        {   
+            var user = await dbContext.UsersInformation
+            .Where(u => u.Username == HttpContext.Session.GetString("Username"))
+            .FirstOrDefaultAsync();
+            if (user != null)
+            {
+                return RedirectToAction("UserDetail", "Home");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> userinformation(UserInformationViewModel viewModel)
+        {
+            var user = await dbContext.UsersInformation
+            .Where(u => u.Username == HttpContext.Session.GetString("Username"))
+            .FirstOrDefaultAsync();
+
+            if (user == null)
+            {
+#pragma warning disable CS8601 // Possible null reference assignment.
+                var userInformation = new Users_Information
+                {
+                    Username = HttpContext.Session.GetString("Username"),
+                    Email = viewModel.Email,
+                    PhoneNumber = viewModel.PhoneNumber,
+                    Address = viewModel.Address,
+                    ColleagueID = viewModel.ColleagueID,
+                    MediaLinked = viewModel.MediaLinked
+                };
+#pragma warning restore CS8601 // Possible null reference assignment.
+                await dbContext.UsersInformation.AddAsync(userInformation);
+                await dbContext.SaveChangesAsync();
+                ViewBag.UserInfoEditMessage = "Bạn đã thêm thông tin cá nhân thành công !";
+                return RedirectToAction("UserDetail", "Home");
+            }
+            else
+            {
+#pragma warning disable CS8601 // Possible null reference assignment.
+                var userInformation = new Users_Information
+                {
+                    Username = HttpContext.Session.GetString("Username"),
+                    Email = viewModel.Email,
+                    PhoneNumber = viewModel.PhoneNumber,
+                    Address = viewModel.Address,
+                    ColleagueID = viewModel.ColleagueID,
+                    MediaLinked = viewModel.MediaLinked
+                };
+#pragma warning restore CS8601 // Possible null reference assignment.
+                dbContext.UsersInformation.Update(userInformation);
+                await dbContext.SaveChangesAsync();
+                ViewBag.UserInfoEditMessage = "Bạn đã cập nhật thông tin cá nhân thành công !";
+                return RedirectToAction("UserDetail", "Home");
+            }
+        }
+
     }
 }

@@ -4,6 +4,7 @@ using AI_Application.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AI_Application.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250623164452_AddUserRelationship")]
+    partial class AddUserRelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -329,15 +332,13 @@ namespace AI_Application.Migrations
 
             modelBuilder.Entity("AI_Application.Models.Users.Users", b =>
                 {
-                    b.Property<string>("Username")
-                        .HasColumnType("varchar(255)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<Guid>("Id")
-                        .HasColumnType("char(36)");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -347,18 +348,19 @@ namespace AI_Application.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.HasKey("Username");
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.HasIndex("Username")
-                        .IsUnique();
+                    b.HasKey("Id");
 
                     b.ToTable("Users");
                 });
 
             modelBuilder.Entity("AI_Application.Models.Users.Users_Information", b =>
                 {
-                    b.Property<string>("Username")
-                        .HasColumnType("varchar(255)");
+                    b.Property<Guid>("ID")
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -372,9 +374,6 @@ namespace AI_Application.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<Guid>("ID")
-                        .HasColumnType("char(36)");
-
                     b.Property<string>("MediaLinked")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -383,7 +382,7 @@ namespace AI_Application.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.HasKey("Username");
+                    b.HasKey("ID");
 
                     b.ToTable("UsersInformation");
                 });
@@ -592,7 +591,7 @@ namespace AI_Application.Migrations
                 {
                     b.HasOne("AI_Application.Models.Users.Users", "User")
                         .WithOne("UsersInformation")
-                        .HasForeignKey("AI_Application.Models.Users.Users_Information", "Username")
+                        .HasForeignKey("AI_Application.Models.Users.Users_Information", "ID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
