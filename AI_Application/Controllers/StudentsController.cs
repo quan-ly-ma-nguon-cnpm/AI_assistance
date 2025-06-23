@@ -2,11 +2,20 @@ using AI_Application.Models.SinhVien;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Threading.Tasks;
+using AI_Application.Data; 
+using Microsoft.EntityFrameworkCore;
+
 
 namespace AI_Application.Controllers
 {
     public class StudentsController : Controller
     {
+        private readonly ApplicationDbContext _context;
+        public StudentsController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index() => View();
         public IActionResult Chat() => View();
 
@@ -62,6 +71,17 @@ namespace AI_Application.Controllers
         {
             ViewData["Title"] = "Lưu tài liệu";
             return View();
+        }
+        public IActionResult ViewReplies()
+        {
+            var tenSinhVien = User.Identity?.Name ?? "SinhVien";
+            var replies = _context.PhanHoiCauHois
+            .Where(p => p.NguoiNhan == tenSinhVien)
+            .Include(p => p.CauHoi)
+            .OrderByDescending(p => p.ThoiGianPhanHoi)
+            .ToList();
+            return View(replies); // Truyền danh sách phản hồi sang View
+            
         }
     }
 }

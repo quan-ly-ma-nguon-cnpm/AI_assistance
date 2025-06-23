@@ -4,6 +4,7 @@ using AI_Application.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AI_Application.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250623142702_AddPhanHoiCauHoi")]
+    partial class AddPhanHoiCauHoi
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,37 +95,6 @@ namespace AI_Application.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PhanHois");
-                });
-
-            modelBuilder.Entity("AI_Application.Models.PhanHoiCauHoi", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CauHoiId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("NguoiGui")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("NguoiNhan")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("NoiDung")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("ThoiGianPhanHoi")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PhanHoiCauHois");
                 });
 
             modelBuilder.Entity("AI_Application.Models.SinhVien.ChatMessage", b =>

@@ -18,6 +18,8 @@ namespace AI_Application.Data
         public DbSet<Users> Users { get; set; } = default!;
         public DbSet<CauHoi> CauHois { get; set; } = default!;
         public DbSet<PhanHoi> PhanHois { get; set; } = default!;
+        public DbSet<PhanHoiCauHoi> PhanHoiCauHois { get; set; } = default!;
+
 
         // ✅ Thêm các bảng từ phần Sinh Viên
         public DbSet<ChatMessage> ChatMessages { get; set; } = default!;
