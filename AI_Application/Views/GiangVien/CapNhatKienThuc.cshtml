@@ -1,14 +1,27 @@
-@model AI_Application.Models.KienThucViewModel;
+@model AI_Application.Models.KienThucViewModel
 @{
     ViewData["Title"] = "Cập nhật kiến thức";
+    var danhSachCauHoi = ViewBag.CauHoiChuaCapNhat as List<AI_Application.Models.CauHoi>;
 }
 <h2>Cập nhật kiến thức</h2>
 
-@if (!string.IsNullOrEmpty(ViewBag.ThongBao)) {
+@if (!string.IsNullOrEmpty(ViewBag.ThongBao))
+{
     <div class="alert alert-info">@ViewBag.ThongBao</div>
 }
 
 <form asp-action="CapNhatKienThuc" method="post">
+    <div class="mb-3">
+        <label>Chọn câu hỏi sinh viên</label>
+        <select class="form-select" name="CauHoiId" onchange="this.form.submit()">
+            <option value="">-- Chọn câu hỏi --</option>
+            @foreach (var ch in danhSachCauHoi)
+            {
+                <option value="@ch.Id">@ch.TieuDe - @ch.NguoiGui</option>
+            }
+        </select>
+    </div>
+
     <div class="mb-3">
         <label>Tiêu đề</label>
         <input asp-for="TieuDe" class="form-control" />
