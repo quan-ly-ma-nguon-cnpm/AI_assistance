@@ -1,3 +1,31 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+@{
+    ViewData["Title"] = "AI Application Chatbot";
 }
+
+    <!DOCTYPE html>
+    <html lang="vi">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewData["Title"]</title>
+        <link rel="stylesheet" href="~/css/Home_Indx.css">
+    </head>
+    <body>
+        @if (TempData["LogoutMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["LogoutMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+        <div class="wave-container">
+            <h1 class="wave-text">
+                <span>W</span><span>e</span><span>l</span><span>c</span><span>o</span><span>m&nbsp;</span><span>t</span><span>o</span>
+            </h1>
+        </div>
+        <div class="shadow-dance-container">
+            <h1 class="shadow-dance-text">Phần mềm hỗ trợ học tập trợ lý Hannah-AI !</h1>
+        </div>
+        <script src="https://kit.fontawesome.com/04df8ad395.js" crossorigin="anonymous"></script>
+    </body>
+    </html>

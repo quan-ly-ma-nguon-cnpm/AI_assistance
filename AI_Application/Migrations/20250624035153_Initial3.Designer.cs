@@ -4,16 +4,19 @@ using AI_Application.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace AI_Application.Data.Migrations
+namespace AI_Application.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250624035153_Initial3")]
+    partial class Initial3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,6 +41,9 @@ namespace AI_Application.Data.Migrations
 
                     b.Property<DateTime>("NgayTao")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<string>("NguoiDatCauHoi")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("NguoiGui")
                         .HasColumnType("longtext");

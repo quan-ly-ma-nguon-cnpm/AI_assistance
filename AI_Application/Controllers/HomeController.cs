@@ -121,12 +121,7 @@ namespace AI_Application.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpGet]
-        public IActionResult userdetail()
-        {
-            return View();
-        }
-
+        
         [HttpGet]
         public async Task<IActionResult> userinformation()
         {   
