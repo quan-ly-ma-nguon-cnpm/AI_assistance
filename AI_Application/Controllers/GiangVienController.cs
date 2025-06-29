@@ -28,6 +28,16 @@ public class GiangVienController : Controller
     {
         var cauHois = _context.CauHois
             .Where(c => !_context.PhanHoiCauHois.Any(p => p.CauHoiId == c.Id))
+            .Select(c => new CauHoiViewModel
+            {
+                Id = c.Id,
+                TieuDe = c.TieuDe,
+                LinhVuc = c.LinhVuc,
+                NgayTao = c.NgayTao,
+                NguoiGui = c.NguoiGui,
+                DaDuyet = c.DaDuyet,
+                NoiDung = c.NoiDung
+            })
             .ToList();
 
         return View("DanhSachCauHoi", cauHois); // Dùng cùng View "DanhSachCauHoi"
@@ -43,15 +53,40 @@ public class GiangVienController : Controller
             LinhVuc = c.LinhVuc,
             NgayTao = c.NgayTao,
             NguoiGui = c.NguoiGui,
+            NoiDung = c.NoiDung,
             DaDuyet = c.DaDuyet
         }).ToList();
 #pragma warning restore CS8601 // Possible null reference assignment.
 
         return View(danhSach);
     }
+public IActionResult DanhSachCauHoiDaPhanHoi()
+{
+    var danhSach = _context.PhanHoiCauHois
+        .Include(p => p.CauHoi)
+        .AsEnumerable()
+        .Select(p => new PhanHoiViewModel
+        {
+            Id = p.Id,
+            NoiDung = p.NoiDung,
+            TieuDe = p.CauHoi?.TieuDe ?? "(Không có tiêu đề)",
+            LinhVuc = p.CauHoi?.LinhVuc ?? "(Không có lĩnh vực)",
+            NgayTao = p.CauHoi?.NgayTao ?? DateTime.MinValue,
+            NguoiGui = p.NguoiGui,
+            ThoiGianGui = p.ThoiGianPhanHoi,
+            DaDuyet = p.DaDuyet,
+            ThoiGianDat = p.ThoiGianPhanHoi
+        })
+        .OrderByDescending(p => p.ThoiGianGui)
+        .ToList();
+
+    return View(danhSach);
+}
 
     public IActionResult DuyetPhanHoi()
     {
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+#pragma warning disable CS8601 // Possible null reference assignment.
         var danhSachPhanHoi = _context.PhanHoiCauHois
         .Include(p => p.CauHoi)
             .Select(static p => new PhanHoiViewModel
@@ -67,6 +102,8 @@ public class GiangVienController : Controller
                 ThoiGianDat = p.ThoiGianPhanHoi
             })
             .ToList();
+#pragma warning restore CS8601 // Possible null reference assignment.
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
 
         return View(danhSachPhanHoi);
     }
@@ -91,6 +128,7 @@ public class GiangVienController : Controller
         var cauHoi = _context.CauHois.FirstOrDefault(c => c.Id == cauHoiId);
         if (cauHoi == null) return NotFound();
 
+#pragma warning disable CS8601 // Possible null reference assignment.
         var ph = new PhanHoiCauHoi
         {
             CauHoiId = cauHoiId,
@@ -100,10 +138,12 @@ public class GiangVienController : Controller
             ThoiGianPhanHoi = DateTime.Now,
             DaDuyet = true
         };
+#pragma warning restore CS8601 // Possible null reference assignment.
 
         _context.PhanHoiCauHois.Add(ph);
         _context.SaveChanges();
 
+        TempData["Success"] = "Gửi phản hồi thành công!";
         return RedirectToAction("DanhSachCauHoiChuaPhanHoi");
     }
 }

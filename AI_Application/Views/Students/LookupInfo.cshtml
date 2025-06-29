@@ -1,7 +1,18 @@
 @{
     ViewData["Title"] = "Tra cứu thông tin";
 }
+<h2>Tra cứu thông tin</h2>
 
-<h1>Tra cứu thông tin</h1>
-<p>Tìm kiếm thông tin bạn cần một cách nhanh chóng.</p>
-<a class="btn btn-secondary" href="/Students/Index">Quay lại trang Sinh Viên</a>
+<form asp-action="LookupInfo" method="post">
+    <input name="keyword" class="form-control" placeholder="Nhập từ khóa..." required />
+    <button type="submit" class="btn btn-success mt-2">Tra cứu</button>
+</form>
+
+@if (ViewBag.KetQua != null)
+{
+    <div class="alert alert-info mt-3">
+        <strong>Kết quả:</strong> @ViewBag.KetQua
+    </div>
+}
+
+<a class="btn btn-secondary mt-4" href="/Students/Index">Quay lại trang Sinh Viên</a>

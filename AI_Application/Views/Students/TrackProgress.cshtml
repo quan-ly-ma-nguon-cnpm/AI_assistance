@@ -1,7 +1,21 @@
 @{
-    ViewData["Title"] = "Theo dõi tiến trình";
+    ViewData["Title"] = "Theo dõi tiến trình học tập";
+    var progressList = ViewBag.Progress as List<string>;
+}
+<h2>Theo dõi tiến trình</h2>
+
+@if (progressList != null)
+{
+    <ul class="list-group">
+        @foreach (var item in progressList)
+        {
+            <li class="list-group-item">@item</li>
+        }
+    </ul>
+}
+else
+{
+    <p>Chưa có dữ liệu tiến trình.</p>
 }
 
-<h1>Theo dõi tiến trình</h1>
-<p>Xem tiến độ học tập và hoàn thành bài tập của bạn.</p>
-<a class="btn btn-secondary" href="/Students/Index">Quay lại trang Sinh Viên</a>
+<a class="btn btn-secondary mt-4" href="/Students/Index">Quay lại trang Sinh Viên</a>

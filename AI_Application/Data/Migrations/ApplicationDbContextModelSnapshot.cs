@@ -39,9 +39,6 @@ namespace AI_Application.Data.Migrations
                     b.Property<DateTime>("NgayTao")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("NguoiDatCauHoi")
-                        .HasColumnType("longtext");
-
                     b.Property<string>("NguoiGui")
                         .HasColumnType("longtext");
 
@@ -133,10 +130,6 @@ namespace AI_Application.Data.Migrations
 
                     b.Property<DateTime>("ThoiGianPhanHoi")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<string>("TieuDe")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 

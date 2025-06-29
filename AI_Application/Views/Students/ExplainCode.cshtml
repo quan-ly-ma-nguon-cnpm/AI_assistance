@@ -1,7 +1,22 @@
 @{
     ViewData["Title"] = "Giải thích Code";
 }
+<h2>Giải thích Code</h2>
 
-<h1>Giải thích Code</h1>
-<p>Trang này giúp bạn hiểu rõ hơn về các đoạn mã. Hãy dán code vào đây để được giải thích.</p>
-<a class="btn btn-secondary" href="/Students/Index">Quay lại trang Sinh Viên</a>
+<form asp-action="ExplainCode" method="post">
+    <div class="form-group">
+        <label for="code">Nhập đoạn code:</label>
+        <textarea name="code" rows="8" class="form-control" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Giải thích</button>
+</form>
+
+@if (ViewBag.Explanation != null)
+{
+    <h4 class="mt-4">Kết quả giải thích:</h4>
+    <div class="alert alert-info">
+        @ViewBag.Explanation
+    </div>
+}
+
+<a class="btn btn-secondary mt-4" href="/Students/Index">Quay lại trang Sinh Viên</a>
