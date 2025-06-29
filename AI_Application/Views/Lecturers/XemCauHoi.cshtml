@@ -1,0 +1,27 @@
+@model List<AI_Application.Models.CauHoi>
+
+<h2>Danh sách câu hỏi từ sinh viên</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Sinh viên</th>
+            <th>Nội dung</th>
+            <th>Thời gian</th>
+            <th>Phản hồi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.NguoiGui</td>
+                <td>@item.NoiDung</td>
+                <td>@item.ThoiGianGui.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>
+                    <a class="btn btn-primary" href="/Lecturers/GuiPhanHoi?cauHoiId=@item.Id">Phản hồi</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

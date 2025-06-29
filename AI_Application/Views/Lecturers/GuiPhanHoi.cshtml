@@ -1,0 +1,16 @@
+@{
+    var cauHoi = ViewBag.CauHoi as AI_Application.Models.CauHoi;
+    ViewData["Title"] = "Phản hồi câu hỏi";
+}
+
+<h2>Phản hồi cho câu hỏi của @cauHoi?.NguoiGui</h2>
+<p><strong>Câu hỏi:</strong> @cauHoi?.NoiDung</p>
+
+<form asp-action="GuiPhanHoi" method="post">
+    <input type="hidden" name="cauHoiId" value="@cauHoi?.Id" />
+    <div class="form-group">
+        <label for="noiDung">Nội dung phản hồi</label>
+        <textarea class="form-control" name="noiDung" rows="4" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-success mt-2">Gửi phản hồi</button>
+</form>

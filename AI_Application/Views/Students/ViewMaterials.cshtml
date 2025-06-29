@@ -1,0 +1,23 @@
+@{
+    ViewData["Title"] = "Tài liệu học tập";
+    var files = ViewBag.Materials as List<string>;
+}
+<h2>Tài liệu học tập</h2>
+
+@if (files != null && files.Any())
+{
+    <ul class="list-group">
+        @foreach (var file in files)
+        {
+            <li class="list-group-item">
+                <a href="@Url.Content("~/materials/" + file)" target="_blank">@file</a>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>Không có tài liệu nào.</p>
+}
+
+<a class="btn btn-secondary mt-4" href="/Students/Index">Quay lại trang Sinh Viên</a>

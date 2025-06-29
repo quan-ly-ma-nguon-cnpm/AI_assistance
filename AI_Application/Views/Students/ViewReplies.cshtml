@@ -1,0 +1,32 @@
+@model List<AI_Application.Models.PhanHoiCauHoi>
+
+<h2>Phản hồi từ giảng viên</h2>
+
+@if (!Model.Any())
+{
+    <p>Không có phản hồi nào.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Câu hỏi</th>
+                <th>Phản hồi</th>
+                <th>Giảng viên</th>
+                <th>Thời gian</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.CauHoi?.NoiDung</td>
+                <td>@item.NoiDung</td>
+                <td>@item.NguoiGui</td>
+                <td>@item.ThoiGianPhanHoi.ToString("dd/MM/yyyy HH:mm")</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

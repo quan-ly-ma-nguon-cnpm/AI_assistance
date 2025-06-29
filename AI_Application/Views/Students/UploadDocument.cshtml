@@ -1,0 +1,24 @@
+@{
+    ViewData["Title"] = "Tải tài liệu lên";
+}
+
+<h1>Tải tài liệu lên</h1>
+
+<form asp-action="UploadDocument" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="uploadedFile">Chọn tệp để tải lên:</label>
+        <input type="file" name="uploadedFile" id="uploadedFile" class="form-control" />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Tải lên</button>
+</form>
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-info mt-3">
+        @ViewBag.Message
+    </div>
+}
+
+<br />
+<a class="btn btn-secondary" href="/Students/Index">Quay lại trang Sinh Viên</a>

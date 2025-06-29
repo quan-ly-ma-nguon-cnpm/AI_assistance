@@ -1,0 +1,181 @@
+@model dynamic
+@{
+    ViewData["Title"] = "Trang Sinh Viên";
+}
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .card {
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease-in-out;
+        margin-bottom: 20px;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+    .card-body {
+        padding: 25px;
+        text-align: center;
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #343a40;
+        margin-bottom: 15px;
+    }
+
+    .card-icon {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        color: #007bff;
+    }
+
+    .card-primary .card-icon { color: #007bff; }
+    .card-success .card-icon { color: #28a745; }
+    .card-warning .card-icon { color: #ffc107; }
+    .card-info .card-icon { color: #17a2b8; }
+    .card-dark .card-icon { color: #343a40; }
+    .card-secondary .card-icon { color: #6c757d; }
+    .card-outline-primary .card-icon { color: #007bff; }
+    .card-outline-success .card-icon { color: #28a745; }
+
+    .btn {
+        width: 80%;
+        padding: 10px 0;
+        font-size: 1.1rem;
+        border-radius: 8px;
+    }
+
+    h2 {
+        text-align: center;
+        margin-top: 30px;
+        margin-bottom: 40px;
+        color: #343a40;
+        font-weight: 300;
+    }
+</style>
+
+<div class="container">
+    <h2>Các Chức Năng Chính Dành Cho Sinh Viên</h2>
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card card-primary h-100">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <div>
+                        <i class="bi bi-chat-dots-fill card-icon"></i>
+                        <h5 class="card-title">Trò chuyện với Hannah</h5>
+                    </div>
+                    <a class="btn btn-primary mt-auto" href="/Students/Chat">Bắt đầu trò chuyện</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card card-success h-100">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <div>
+                        <i class="bi bi-code-slash card-icon"></i>
+                        <h5 class="card-title">Giải thích code</h5>
+                    </div>
+                    <a class="btn btn-success mt-auto" href="/Students/ExplainCode">Giải thích code</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card card-warning h-100">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <div>
+                        <i class="bi bi-question-square-fill card-icon"></i>
+                        <h5 class="card-title">Hỏi bài tập</h5>
+                    </div>
+                    <a class="btn btn-warning mt-auto" href="/Students/AskExercise">Hỏi ngay</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card card-info h-100">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <div>
+                        <i class="bi bi-book-fill card-icon"></i>
+                        <h5 class="card-title">Tài liệu học tập</h5>
+                    </div>
+                    <a class="btn btn-info mt-auto" href="/Students/ViewMaterials">Xem tài liệu</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6 mb-4">
+
+            
+    <div class="card card-outline-warning h-100">
+        <div class="card-body d-flex flex-column justify-content-between">
+            <div>
+                <i class="bi bi-reply-all-fill card-icon"></i>
+                <h5 class="card-title">Phản hồi từ giảng viên</h5>
+            </div>
+            <a class="btn btn-outline-warning mt-auto" href="/Students/ViewReplies">Xem phản hồi</a>
+        </div>
+    </div>
+</div>
+
+
+        <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card card-dark h-100">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <div>
+                        <i class="bi bi-graph-up card-icon"></i>
+                        <h5 class="card-title">Theo dõi tiến trình</h5>
+                    </div>
+                    <a class="btn btn-dark mt-auto" href="/Students/TrackProgress">Xem tiến trình</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card card-secondary h-100">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <div>
+                        <i class="bi bi-info-circle-fill card-icon"></i>
+                        <h5 class="card-title">Tra cứu thông tin</h5>
+                    </div>
+                    <a class="btn btn-secondary mt-auto" href="/Students/LookupInfo">Tra cứu</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card card-outline-primary h-100">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <div>
+                        <i class="bi bi-cloud-arrow-up-fill card-icon"></i>
+                        <h5 class="card-title">Tải tài liệu lên</h5>
+                    </div>
+                    <a class="btn btn-outline-primary mt-auto" href="/Students/UploadDocument">Tải lên</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card card-outline-success h-100">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <div>
+                        <i class="bi bi-save-fill card-icon"></i>
+                        <h5 class="card-title">Lưu tài liệu</h5>
+                    </div>
+                    <a class="btn btn-outline-success mt-auto" href="/Students/SaveDocument">Lưu tài liệu</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

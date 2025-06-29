@@ -1,0 +1,42 @@
+@model List<AI_Application.Models.CauHoiViewModel>
+
+@{
+    ViewData["Title"] = "Danh sách câu hỏi từ sinh viên";
+}
+
+<h2>Danh sách câu hỏi từ sinh viên</h2>
+
+@if (!Model.Any())
+{
+    <p>Hiện chưa có câu hỏi nào.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Sinh viên</th>
+                <th>Câu hỏi</th>
+                <th>Thời gian</th>
+                <th>Phản hồi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cauHoi in Model)
+            {
+                <tr>
+                    <td>@cauHoi.NguoiGui</td>
+                    <td>@cauHoi.NoiDung</td>
+                    <td>@(cauHoi.ThoiGianDat?.ToString("dd/MM/yyyy HH:mm"))</td>
+                    <td>
+                        <form asp-action="GuiPhanHoi" method="post">
+                            <input type="hidden" name="cauHoiId" value="@cauHoi.Id" />
+                            <textarea name="noiDung" rows="2" class="form-control" placeholder="Nhập phản hồi..."></textarea>
+                            <button type="submit" class="btn btn-sm btn-primary mt-1">Gửi</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
