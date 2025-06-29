@@ -38,7 +38,7 @@ namespace AI_Application.Controllers
         public IActionResult AskExercise() => View();
 
         [HttpPost]
-        public IActionResult AskExercise(CauHoi model)
+        public async Task<IActionResult> AskExercise(CauHoi model)
         {
             if (ModelState.IsValid)
             {
@@ -48,7 +48,7 @@ namespace AI_Application.Controllers
                 model.DaDuyet = false;
 
                 _context.CauHois.Add(model);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
                 TempData["Success"] = "Gửi câu hỏi thành công!";
                 return RedirectToAction("AskExercise");

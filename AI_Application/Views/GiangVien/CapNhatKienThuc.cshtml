@@ -15,9 +15,16 @@
         <label>Chọn câu hỏi sinh viên</label>
         <select class="form-select" name="CauHoiId" onchange="this.form.submit()">
             <option value="">-- Chọn câu hỏi --</option>
-            @foreach (var ch in danhSachCauHoi)
+            @if (danhSachCauHoi != null && danhSachCauHoi.Any())
             {
-                <option value="@ch.Id">@ch.TieuDe - @ch.NguoiGui</option>
+                @foreach (var ch in danhSachCauHoi)
+                {
+                    <option value="@ch.Id">@ch.TieuDe - @ch.NguoiGui</option>
+                }
+            }
+            else
+            {
+                <option value="">No questions available</option>
             }
         </select>
     </div>

@@ -131,10 +131,6 @@ namespace AI_Application.Data.Migrations
                     b.Property<DateTime>("ThoiGianPhanHoi")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("TieuDe")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CauHoiId");

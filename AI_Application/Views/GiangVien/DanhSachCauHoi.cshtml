@@ -4,18 +4,28 @@
     ViewData["Title"] = "Danh sách câu hỏi từ sinh viên";
 }
 
-<h2>Danh sách câu hỏi từ sinh viên</h2>
+<h2>@ViewData["Title"]</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
 
 @if (!Model.Any())
 {
-    <p>Hiện chưa có câu hỏi nào.</p>
+    <p class="text-muted">Hiện chưa có câu hỏi nào.</p>
 }
 else
 {
-    <table class="table table-bordered">
-        <thead>
+    <table class="table table-bordered table-hover">
+        <thead class="table-light">
             <tr>
                 <th>Sinh viên</th>
+                <th>Tiêu đề</th>
+                <th>Lĩnh vực</th>
                 <th>Câu hỏi</th>
                 <th>Thời gian</th>
                 <th>Phản hồi</th>
@@ -26,13 +36,15 @@ else
             {
                 <tr>
                     <td>@cauHoi.NguoiGui</td>
+                    <td>@cauHoi.TieuDe</td>
+                    <td>@cauHoi.LinhVuc</td>
                     <td>@cauHoi.NoiDung</td>
-                    <td>@(cauHoi.ThoiGianDat?.ToString("dd/MM/yyyy HH:mm"))</td>
+                    <td>@cauHoi.NgayTao.ToString("dd/MM/yyyy HH:mm")</td>
                     <td>
                         <form asp-action="GuiPhanHoi" method="post">
                             <input type="hidden" name="cauHoiId" value="@cauHoi.Id" />
-                            <textarea name="noiDung" rows="2" class="form-control" placeholder="Nhập phản hồi..."></textarea>
-                            <button type="submit" class="btn btn-sm btn-primary mt-1">Gửi</button>
+                            <textarea name="noiDung" rows="2" class="form-control mb-1" placeholder="Nhập phản hồi..."></textarea>
+                            <button type="submit" class="btn btn-sm btn-primary">Gửi</button>
                         </form>
                     </td>
                 </tr>

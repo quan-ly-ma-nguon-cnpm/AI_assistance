@@ -12,8 +12,6 @@ namespace AI_Application.Models
     
         public CauHoi? CauHoi { get; set; } 
         public bool DaDuyet { get; set; } = false;
-        public string TieuDe { get; set; } = string.Empty;
-
 
         public DateTime ThoiGianPhanHoi { get; set; } = DateTime.Now;
     }

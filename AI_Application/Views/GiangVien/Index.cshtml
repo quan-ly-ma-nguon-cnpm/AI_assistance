@@ -1,102 +1,59 @@
-@model dynamic
 @{
     ViewData["Title"] = "Trang Giảng Viên";
 }
 
-<style>
-    body {
-        background-color: #f8f9fa;
-    }
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="fw-bold mb-3">Các Chức Năng Dành Cho Giảng Viên</h1>
+        <p class="text-muted">Quản lý câu hỏi, phản hồi và cập nhật kiến thức dễ dàng.</p>
+    </div>
 
-    .card {
-        border-radius: 15px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s ease-in-out;
-        margin-bottom: 20px;
-    }
-
-    .card:hover {
-        transform: translateY(-5px);
-    }
-
-    .card-body {
-        padding: 25px;
-        text-align: center;
-    }
-
-    .card-title {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: #343a40;
-        margin-bottom: 15px;
-    }
-
-    .card-icon {
-        font-size: 3rem;
-        margin-bottom: 15px;
-    }
-
-    h2 {
-        text-align: center;
-        margin-top: 30px;
-        margin-bottom: 40px;
-        color: #343a40;
-        font-weight: 300;
-    }
-
-    .btn {
-        width: 80%;
-        padding: 10px 0;
-        font-size: 1.1rem;
-        border-radius: 8px;
-    }
-
-    .card-primary .card-icon { color: #007bff; }
-    .card-success .card-icon { color: #28a745; }
-    .card-warning .card-icon { color: #ffc107; }
-
-</style>
-
-<div class="container">
-    <h2>Các Chức Năng Dành Cho Giảng Viên</h2>
-
-    <div class="row justify-content-center">
-
-        <div class="col-md-4 col-sm-6 mb-4">
-            <div class="card card-primary h-100">
-                <div class="card-body d-flex flex-column justify-content-between">
-                    <div>
-                        <i class="bi bi-journal-text card-icon"></i>
-                        <h5 class="card-title">Cập nhật kiến thức</h5>
-                    </div>
-                    <a class="btn btn-primary mt-auto" href="/GiangVien/CapNhatKienThuc">Truy cập</a>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm hover-shadow">
+                <div class="card-body text-center">
+                    <i class="bi bi-journal-text fs-1 text-primary"></i>
+                    <h5 class="card-title mt-3">Cập nhật kiến thức</h5>
+                    <p class="card-text text-muted">Thêm mới các nội dung, tài liệu hỗ trợ sinh viên.</p>
+                    <a href="/GiangVien/CapNhatKienThuc" class="btn btn-primary mt-2">Truy cập</a>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4 col-sm-6 mb-4">
-            <div class="card card-success h-100">
-                <div class="card-body d-flex flex-column justify-content-between">
-                    <div>
-                        <i class="bi bi-card-list card-icon"></i>
-                        <h5 class="card-title">Danh sách câu hỏi</h5>
-                    </div>
-                    <a class="btn btn-success mt-auto" href="/GiangVien/DanhSachCauHoi">Xem câu hỏi</a>
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm hover-shadow">
+                <div class="card-body text-center">
+                    <i class="bi bi-list-ul fs-1 text-success"></i>
+                    <h5 class="card-title mt-3">Danh sách câu hỏi</h5>
+                    <p class="card-text text-muted">Xem, phản hồi các câu hỏi được gửi từ sinh viên.</p>
+                    <a href="/GiangVien/DanhSachCauHoi" class="btn btn-success mt-2">Xem câu hỏi</a>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4 col-sm-6 mb-4">
-            <div class="card card-warning h-100">
-                <div class="card-body d-flex flex-column justify-content-between">
-                    <div>
-                        <i class="bi bi-chat-dots card-icon"></i>
-                        <h5 class="card-title">Duyệt phản hồi</h5>
-                    </div>
-                    <a class="btn btn-warning mt-auto" href="/GiangVien/DuyetPhanHoi">Duyệt ngay</a>
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm hover-shadow">
+                <div class="card-body text-center">
+                    <i class="bi bi-chat-dots fs-1 text-warning"></i>
+                    <h5 class="card-title mt-3">Duyệt phản hồi</h5>
+                    <p class="card-text text-muted">Quản lý các phản hồi đã gửi tới sinh viên.</p>
+                    <a href="/GiangVien/DuyetPhanHoi" class="btn btn-warning mt-2">Duyệt ngay</a>
                 </div>
             </div>
         </div>
+    </div>
 
+    <div class="text-center mt-5">
+        <a href="/GiangVien/DanhSachCauHoiDaPhanHoi" class="btn btn-outline-info px-4 py-2">
+            Xem câu hỏi đã phản hồi
+        </a>
     </div>
 </div>
+
+<style>
+    .hover-shadow:hover {
+        box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15);
+        transform: translateY(-5px);
+        transition: 0.3s ease;
+    }
+</style>
