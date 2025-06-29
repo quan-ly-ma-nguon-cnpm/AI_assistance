@@ -58,12 +58,13 @@ public class GiangVienController : Controller
             {
                 Id = p.Id,
                 NoiDung = p.NoiDung,
-                TieuDe = p.CauHoi.TieuDe,
+                TieuDe = p.CauHoi.TieuDe,   
                 LinhVuc = p.CauHoi.LinhVuc,
                 NgayTao = p.CauHoi.NgayTao,
                 NguoiGui = p.NguoiGui,
                 ThoiGianGui = p.ThoiGianPhanHoi,
-                DaDuyet = p.DaDuyet
+                DaDuyet = p.DaDuyet,
+                ThoiGianDat = p.ThoiGianPhanHoi
             })
             .ToList();
 

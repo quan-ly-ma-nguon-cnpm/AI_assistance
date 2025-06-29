@@ -8,7 +8,7 @@ namespace AI_Application.Models
         public string? NoiDung { get; set; }
         public DateTime? ThoiGianDat { get; set; }
         public DateTime NgayTao { get; set; } 
-        public string NguoiGui { get; set; }
+        public string? NguoiGui { get; set; }
         public bool DaDuyet { get; set; }
 
         public CauHoiViewModel()

@@ -80,6 +80,7 @@ namespace AI_Application.Controllers
             if (ModelState.IsValid)
             {
                 model.NgayTao = DateTime.Now;
+                model.ThoiGianGui = DateTime.Now;
                 model.NguoiGui = User.Identity?.Name ?? "SinhVien";
                 model.DaDuyet = false;
 
