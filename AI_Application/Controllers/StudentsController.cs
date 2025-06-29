@@ -24,7 +24,7 @@ namespace AI_Application.Controllers
         public IActionResult ExplainCode() => View();
 
         [HttpPost]
-        public async Task<IActionResult> ExplainCode(string code)
+        public IActionResult ExplainCode(string code)
         {
             if (!string.IsNullOrEmpty(code))
             {
