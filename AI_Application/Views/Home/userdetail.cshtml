@@ -4,7 +4,7 @@
     ViewData["Title"] = "User Information";
 }
 
-<h2>User Information</h2>
+<h2>@ViewData["Title"]</h2>
 
 <div class="card p-3">
     <dl class="row">
@@ -26,6 +26,6 @@
         </dd>
     </dl>
 
-    <a asp-action="UserInformation" asp-controller = "Home" asp-route-id="@Model.Username" class="btn btn-primary">Edit</a>
+    <a asp-action="UserInformation" asp-controller = "Home" class="btn btn-primary">Edit</a>
     <a asp-action="Index" class="btn btn-secondary">Back to List</a>
 </div>
