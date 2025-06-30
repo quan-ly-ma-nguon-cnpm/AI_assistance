@@ -1,10 +1,10 @@
 @model IEnumerable<AI_Application.Models.SinhVien.UploadedDocument>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Thư mục đã tải lên";
 }
 
-<h1>Index</h1>
+<h1>Thư mục đã tải lên</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -46,8 +46,12 @@
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <br />
+
+
             </td>
         </tr>
 }
     </tbody>
 </table>
+<a class="btn btn-secondary" href="/Students/Index">Quay lại trang Sinh Viên</a>

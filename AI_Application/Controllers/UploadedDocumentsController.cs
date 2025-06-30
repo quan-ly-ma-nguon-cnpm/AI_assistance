@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AI_Application.Data;
 using AI_Application.Models.SinhVien;
+using System.IO;
 
 namespace AI_Application.Controllers
 {
@@ -50,8 +51,6 @@ namespace AI_Application.Controllers
         }
 
         // POST: UploadedDocuments/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,StudentId,FileName,FilePath,UploadedAt")] UploadedDocument uploadedDocument)
@@ -82,8 +81,6 @@ namespace AI_Application.Controllers
         }
 
         // POST: UploadedDocuments/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,StudentId,FileName,FilePath,UploadedAt")] UploadedDocument uploadedDocument)
@@ -147,6 +144,33 @@ namespace AI_Application.Controllers
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        // GET: UploadedDocuments/ViewFile/5
+        public IActionResult ViewFile(int id)
+        {
+            var document = _context.UploadedDocuments.FirstOrDefault(d => d.Id == id);
+            if (document == null || !System.IO.File.Exists(document.FilePath))
+            {
+                return NotFound("Không tìm thấy tài liệu.");
+            }
+
+            var contentType = GetContentType(document.FilePath);
+            var fileBytes = System.IO.File.ReadAllBytes(document.FilePath);
+            return File(fileBytes, contentType, document.FileName);
+        }
+
+        private string GetContentType(string path)
+        {
+            var ext = Path.GetExtension(path).ToLowerInvariant();
+            return ext switch
+            {
+                ".pdf" => "application/pdf",
+                ".doc" => "application/msword",
+                ".docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                ".txt" => "text/plain",
+                _ => "application/octet-stream",
+            };
         }
 
         private bool UploadedDocumentExists(int id)
