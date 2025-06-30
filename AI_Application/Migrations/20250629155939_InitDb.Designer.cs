@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AI_Application.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250629091535_Migration2")]
-    partial class Migration2
+    [Migration("20250629155939_InitDb")]
+    partial class InitDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -133,10 +133,6 @@ namespace AI_Application.Migrations
 
                     b.Property<DateTime>("ThoiGianPhanHoi")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<string>("TieuDe")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 

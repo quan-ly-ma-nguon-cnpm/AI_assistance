@@ -1,0 +1,40 @@
+@model List<AI_Application.Models.PhanHoiViewModel>
+
+@{
+    ViewData["Title"] = "Danh sách câu hỏi đã phản hồi";
+}
+
+<h2>Danh sách câu hỏi đã phản hồi</h2>
+
+@if (!Model.Any())
+{
+    <p>Chưa có phản hồi nào được gửi.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Người hỏi</th>
+                <th>Tiêu đề</th>
+                <th>Lĩnh vực</th>
+                <th>Nội dung câu hỏi</th>
+                <th>Nội dung phản hồi</th>
+                <th>Thời gian phản hồi</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.NguoiGui</td>
+                <td>@item.TieuDe</td>
+                <td>@item.LinhVuc</td>
+                <td>@item.TieuDe</td>
+                <td>@item.NoiDung</td>
+                <td>@(item.ThoiGianGui.ToString("dd/MM/yyyy HH:mm"))</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
