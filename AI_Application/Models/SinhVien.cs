@@ -40,7 +40,7 @@ namespace AI_Application.Models.SinhVien
     public class LearningProgress
     {
         public int Id { get; set; }
-        public string StudentId { get; set; } = string.Empty;
+        public int StudentId { get; set; } 
         public string Activity { get; set; } = string.Empty;
         public double CompletionPercentage { get; set; }
         public DateTime LastUpdated { get; set; } = DateTime.Now;

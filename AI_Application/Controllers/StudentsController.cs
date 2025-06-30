@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AI_Application.Data;
 using Microsoft.EntityFrameworkCore;
 using AI_Application.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace AI_Application.Controllers
 {
@@ -20,7 +21,7 @@ namespace AI_Application.Controllers
         public IActionResult Index() => View();
         public IActionResult Chat() => View();
 
-        // ✅ GIẢI THÍCH CODE
+        // Giải thích code
         public IActionResult ExplainCode() => View();
 
         [HttpPost]
@@ -34,7 +35,7 @@ namespace AI_Application.Controllers
             return View();
         }
 
-        // ✅ GỬI BÀI TẬP
+        // Gửi bài tập 
         public IActionResult AskExercise() => View();
 
         [HttpPost]
@@ -56,7 +57,7 @@ namespace AI_Application.Controllers
             return View(model);
         }
 
-        // ✅ XEM PHẢN HỒI TỪ GIẢNG VIÊN
+        // Xem phản hồi từ giảng viên 
         public IActionResult ViewReplies()
         {
             var tenSinhVien = User.Identity?.Name ?? "SinhVien";
@@ -70,7 +71,7 @@ namespace AI_Application.Controllers
             return View(replies);
         }
 
-        // ✅ XEM TÀI LIỆU HỌC TẬP
+        // Xem tài liệu học tập 
         public IActionResult ViewMaterials()
         {
             var materialsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "materials");
@@ -85,7 +86,7 @@ namespace AI_Application.Controllers
             return View();
         }
 
-        // ✅ THEO DÕI TIẾN TRÌNH HỌC TẬP
+        // Theo dõi tiến trình 
         public IActionResult TrackProgress()
         {
             var name = User.Identity?.Name ?? "SinhVien";
@@ -101,7 +102,7 @@ namespace AI_Application.Controllers
             return View();
         }
 
-        // ✅ TRA CỨU THÔNG TIN
+        // Tra cứu thông tin 
         public IActionResult LookupInfo() => View();
 
         [HttpPost]
@@ -114,7 +115,7 @@ namespace AI_Application.Controllers
             return View();
         }
 
-        // ✅ TẢI FILE LÊN
+        // Tải file lên 
         public IActionResult UploadDocument() => View();
 
         [HttpPost]
@@ -136,9 +137,21 @@ namespace AI_Application.Controllers
                     {
                         await uploadedFile.CopyToAsync(stream);
                     }
+
+                    var document = new UploadedDocument
+                    {
+                        StudentId = HttpContext.Session.GetString("UserId") ?? "0",
+                        FileName = uploadedFile.FileName,
+                        FilePath = "/uploads/" + uniqueFileName,
+                        UploadedAt = DateTime.Now
+                    };
+
+                    _context.UploadedDocuments.Add(document);
+                    await _context.SaveChangesAsync();
+
                     ViewBag.Message = $"Tải tệp '{uploadedFile.FileName}' lên thành công!";
                 }
-                catch (System.Exception ex)
+                catch (Exception ex)
                 {
                     ViewBag.Message = $"Lỗi khi tải tệp lên: {ex.Message}";
                 }
@@ -151,7 +164,7 @@ namespace AI_Application.Controllers
             return View();
         }
 
-        // ✅ LƯU TÀI LIỆU
+        // Lưu tài liệu
         public IActionResult SaveDocument()
         {
             ViewData["Title"] = "Lưu tài liệu";
