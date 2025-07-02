@@ -5,3 +5,4 @@
 .vs
 AI_Application/obj/
 AI_Application/bin/
+AI_Application/appsettings.json
