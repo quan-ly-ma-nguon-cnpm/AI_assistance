@@ -1,0 +1,48 @@
+@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser>
+    
+
+@{
+    ViewData["Title"] = "Quản lý người dùng";
+}
+
+<h2 class="mb-4">Quản lý người dùng</h2>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>STT</th>
+            <th>Tên đăng nhập</th>
+            <th>Email</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            int stt = 1;
+            foreach (var user in Model)
+            {
+                <tr>
+                    <td>@stt</td>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@user.Id" class="btn btn-sm btn-primary">
+                            <i class="bi bi-pencil-square"></i> Sửa
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@user.Id" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc muốn xóa người dùng này không?');">
+                            <i class="bi bi-trash"></i> Xóa
+                        </a>
+                    </td>
+                </tr>
+                stt++;
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4" class="text-center">Không có người dùng nào.</td>
+            </tr>
+        }
+    </tbody>
+</table>

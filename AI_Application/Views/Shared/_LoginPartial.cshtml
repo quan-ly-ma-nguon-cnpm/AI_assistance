@@ -8,7 +8,9 @@
 @{  
     var user_Id = HttpContextAccessor.HttpContext?.Session?.GetString("User_Id");   
     var username = HttpContextAccessor.HttpContext?.Session?.GetString("Username");
+    var user_Role = HttpContextAccessor.HttpContext?.Session?.GetString("Role");
 }  
+
 <style>  
     .navigation {  
         display: none;  
@@ -32,12 +34,10 @@
     .login:hover, .register:hover {  
         font-weight: 600;  
     }  
-
     .login-link, .register-link {  
         text-decoration: none;  
         color: black;  
     }  
-
     .admin {  
         cursor: pointer;  
         margin: 10px;  
@@ -122,6 +122,13 @@
         <span class="user-name">
             <a asp-controller="Home" asp-action="UserInformation">Hello, @username!</a>
         </span>
+
+        @* 👇 Nếu là Admin, thêm liên kết vào trang phân quyền *@
+        @if (user_Role == "Admin")
+        {
+            <a asp-controller="User" asp-action="Index" class="nav-link text-dark">Quản lý người dùng</a>
+        }
+
         <form asp-controller="Home" asp-action="Logout" method="post" style="display:inline;">
             <button type="submit" class="logout-btn">Logout</button>
         </form>
@@ -130,23 +137,26 @@
     {
         @if (SignInManager.IsSignedIn(User)) {
             <li class="nav-item">
-                <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index">
                     Hello @UserManager.GetUserName(User)!
                 </a>
             </li>
             <li class="nav-item">
-                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home")">
                     <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
                 </form>
             </li>
-        }else{
+        }
+        else
+        {
             <ul class="navbar-nav">
                 <li class="login">
-                    <a class="login-link" asp-area="" asp-controller="Home" asp-action="Userlogin">Login</a>
+                    <a class="login-link" asp-controller="Home" asp-action="Userlogin">Login</a>
                 </li>
                 <li class="register">
-                    <a class="register-link" asp-area="" asp-controller="Home" asp-action="Userregister">Register</a>
+                    <a class="register-link" asp-controller="Home" asp-action="Userregister">Register</a>
                 </li>
+                @* Nút Admin chỉ để hiện navigation nếu cần dropdown chức năng *@
                 <li class="admin">Admin</li>
             </ul>
         }
@@ -157,13 +167,12 @@
     document.addEventListener("DOMContentLoaded", () => {  
         const adminButton = document.querySelector(".admin");  
         const navigation = document.querySelector(".navigation");  
-          
+
         if (adminButton && navigation) {  
             adminButton.addEventListener("click", () => {  
                 navigation.style.display = navigation.style.display === "block" ? "none" : "block";  
             });  
-              
-            // Close the navigation when clicking outside  
+
             document.addEventListener("click", (event) => {  
                 if (!navigation.contains(event.target) && event.target !== adminButton) {  
                     navigation.style.display = "none";  

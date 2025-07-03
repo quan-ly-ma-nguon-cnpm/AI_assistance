@@ -4,16 +4,19 @@ using AI_Application.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace AI_Application.Data.Migrations
+namespace AI_Application.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250702170219_Initial8")]
+    partial class Initial8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -368,36 +371,6 @@ namespace AI_Application.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("UploadedDocuments");
-                });
-
-            modelBuilder.Entity("AI_Application.Models.SystemConfig", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(1000)
-                        .HasColumnType("varchar(1000)");
-
-                    b.Property<string>("Key")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<DateTime>("LastUpdated")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SystemConfigs");
                 });
 
             modelBuilder.Entity("AI_Application.Models.Users.Users", b =>

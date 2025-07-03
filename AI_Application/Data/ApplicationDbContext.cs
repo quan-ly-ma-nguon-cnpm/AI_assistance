@@ -33,6 +33,9 @@ namespace AI_Application.Data
         public DbSet<SavedDocument> SavedDocuments { get; set; } = default!;
         public DbSet<Users_Information> UsersInformation { get; set; } = default!;
 
+        public DbSet<AI_Application.Models.SystemConfig> SystemConfigs { get; set; } = default!;
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

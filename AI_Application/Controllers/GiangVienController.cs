@@ -31,8 +31,8 @@ public class GiangVienController : Controller
             .Select(c => new CauHoiViewModel
             {
                 Id = c.Id,
-                TieuDe = c.TieuDe,
-                LinhVuc = c.LinhVuc,
+                TieuDe = c.TieuDe ?? string.Empty,
+                LinhVuc = c.LinhVuc ?? string.Empty,
                 NgayTao = c.NgayTao,
                 NguoiGui = c.NguoiGui,
                 DaDuyet = c.DaDuyet,

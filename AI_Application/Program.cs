@@ -47,10 +47,11 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddHttpClient();
 builder.Services.AddSession(options =>
+
 {
     options.IdleTimeout = TimeSpan.FromMinutes(1);
     options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true; 
+    options.Cookie.IsEssential = true;
 });
 builder.Services.AddHttpContextAccessor();
 
@@ -88,7 +89,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseSession();
 
-app.MapDefaultControllerRoute();
+
 
 
 app.MapControllerRoute(

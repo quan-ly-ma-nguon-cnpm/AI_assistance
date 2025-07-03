@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity  
-@using Microsoft.AspNetCore.Mvc;  
-@using Microsoft.AspNetCore.Http;  
+@using Microsoft.AspNetCore.Mvc  
+@using Microsoft.AspNetCore.Http  
 @inject IHttpContextAccessor HttpContextAccessor  
 @inject SignInManager<IdentityUser> SignInManager  
 @inject UserManager<IdentityUser> UserManager
@@ -19,45 +19,71 @@
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/AI_Application.styles.css" asp-append-version="true" />
-
-    </head>
+</head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><span class="app-title"><i class="fa-solid fa-robot"></i>&nbsp;Hannah-AI</span></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <span class="app-title"><i class="fa-solid fa-robot"></i>&nbsp;Hannah-AI</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav">
                         <li class="nav-item-1">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        @if (!string.IsNullOrEmpty(username)){
-                            if (user_Role == "Student"){
+
+                        @if (!string.IsNullOrEmpty(username))
+                        {
+                            if (user_Role == "Student")
+                            {
                                 <li class="nav-item-1">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="Index">Dashboard</a>
+                                    <a class="nav-link text-dark" asp-controller="Students" asp-action="Index">Dashboard</a>
                                 </li>
-                            }else if (user_Role == "Faculty"){
+                            }
+                            else if (user_Role == "Faculty")
+                            {
                                 <li class="nav-item-1">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="GiangVien" asp-action="Index">Dashboard</a>
-                                    </li>
-                                
+                                    <a class="nav-link text-dark" asp-controller="GiangVien" asp-action="Index">Dashboard</a>
+                                </li>
+                            }
+                            else if (user_Role == "Admin")
+                            {
                                 <li class="nav-item-1">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="GiangVien" asp-action="Index">Dashboard</a>
+                                    <a class="nav-link text-dark" asp-controller="User" asp-action="Index">Quản lý người dùng</a>
+                                </li>
+                                <li class="nav-item-1">
+                                    <a class="nav-link text-dark" asp-controller="Role" asp-action="Index">Phân quyền</a>
+                                </li>
+                                <li class="nav-item-1">
+                                    <a class="nav-link text-dark" asp-controller="SystemConfig" asp-action="Index">Cấu hình hệ thống</a>
+                                </li>
+                                <li class="nav-item-1">
+                                    <a class="nav-link text-dark" asp-controller="Knowledge" asp-action="Index">Kho tri thức</a>
+                                </li>
+                                <li class="nav-item-1">
+                                    <a class="nav-link text-dark" asp-controller="ContentVersion" asp-action="Index">Phiên bản nội dung</a>
+                                </li>
+                                <li class="nav-item-1">
+                                    <a class="nav-link text-dark" asp-controller="TrainingData" asp-action="Index">Dữ liệu huấn luyện</a>
+                                </li>
+                                <li class="nav-item-1">
+                                    <a class="nav-link text-dark" asp-controller="Report" asp-action="Index">Báo cáo</a>
                                 </li>
                             }
                         }
-                        <li class="nav-item-1">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
 
+                        <li class="nav-item-1">
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
                     </ul>
+
                     <ul class="navbar-nav ms-auto">
                         <partial name="_LoginPartial" />
                     </ul>
@@ -65,6 +91,7 @@
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -73,9 +100,10 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2025 - AI_Application - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2025 - AI_Application - <a asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
