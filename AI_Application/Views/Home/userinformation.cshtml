@@ -20,27 +20,27 @@
 <form asp-action="UserInformation" method="post">
     <div class="form-group">
         <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" />
+        <input asp-for="Email" class="form-control" required/>
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="PhoneNumber"></label>
-        <input asp-for="PhoneNumber" class="form-control" />
+        <input asp-for="PhoneNumber" class="form-control" required/>
         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="ColleagueID"></label>
-        <input asp-for="ColleagueID" class="form-control" />
+        <input asp-for="ColleagueID" class="form-control" required/>
         <span asp-validation-for="ColleagueID" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Address"></label>
-        <input asp-for="Address" class="form-control" />
+        <input asp-for="Address" class="form-control" required/>
         <span asp-validation-for="Address" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="MediaLinked"></label>
-        <input asp-for="MediaLinked" class="form-control" />
+        <input asp-for="MediaLinked" class="form-control" required/>
         <span asp-validation-for="MediaLinked" class="text-danger"></span>
     </div>
     <input type="hidden" asp-for="Username" value="@Username"/>

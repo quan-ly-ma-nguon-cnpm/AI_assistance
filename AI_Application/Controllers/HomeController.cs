@@ -121,10 +121,10 @@ namespace AI_Application.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        
+
         [HttpGet]
         public async Task<IActionResult> userinformation()
-        {   
+        {
             var user = await dbContext.UsersInformation
             .Where(u => u.Username == HttpContext.Session.GetString("Username"))
             .FirstOrDefaultAsync();
@@ -183,5 +183,17 @@ namespace AI_Application.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<IActionResult> userdetail()
+        {
+            var userinfo = await dbContext.UsersInformation
+            .Where(u => u.Username == HttpContext.Session.GetString("Username"))
+            .FirstOrDefaultAsync();
+            if (userinfo == null)
+            {
+                return RedirectToAction("UserInformation", "Home");
+            }
+            return View(userinfo);
+        }
     }
 }

@@ -37,7 +37,7 @@
                 @Html.DisplayFor(modelItem => item.FileName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FilePath)
+                <a href="@Html.DisplayFor(modelItem => item.FilePath)" download>Download </a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UploadedAt)

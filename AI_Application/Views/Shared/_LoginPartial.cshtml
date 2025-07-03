@@ -120,7 +120,7 @@
     @if (!string.IsNullOrEmpty(username))
     {
         <span class="user-name">
-            <a asp-controller="Home" asp-action="UserInformation">Hello, @username!</a>
+            <a asp-controller="Home" asp-action="UserDetail">Hello, @username!</a>
         </span>
 
         @* 👇 Nếu là Admin, thêm liên kết vào trang phân quyền *@
