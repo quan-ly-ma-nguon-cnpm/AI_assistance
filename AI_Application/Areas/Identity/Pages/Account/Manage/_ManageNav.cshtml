@@ -1,7 +1,17 @@
-@model AI_Application.Areas.Identity.Pages.Account.Manage.IndexModel
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.Rendering
 @inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 
 @{
+    var user = await UserManager.GetUserAsync(User);
+    var userRole = "Unknown";
+    if (user != null)
+    {
+        var roles = await UserManager.GetRolesAsync(user);
+        userRole = roles.FirstOrDefault() ?? "Unknown";
+    }
+
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
 
@@ -28,8 +38,7 @@
         <a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" asp-page="./PersonalData">Personal data</a>
     </li>
 
-    <!-- ✅ Hiển thị "Manage Roles" nếu là Admin -->
-    @if (Model.UserRole == "Admin")
+    @if (userRole == "Admin")
     {
         <li class="nav-item">
             <a class="nav-link @ManageNavPages.ManageRolesNavClass(ViewContext)"
@@ -37,11 +46,17 @@
                 Manage Roles
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link @ManageNavPages.KnowledgeNavClass(ViewContext)"
+               asp-controller="Knowledge" asp-action="Index">
+                Knowledge Base
+            </a>
+        </li>
     }
     else
     {
         <li class="nav-item">
-            <a class="nav-link disabled text-muted">Role: @Model.UserRole</a>
+            <a class="nav-link disabled text-muted">Role: @userRole</a>
         </li>
     }
 </ul>

@@ -7,7 +7,8 @@ using AI_Application.Models.SinhVien; // Thêm để gọi các model SinhVien
 
 namespace AI_Application.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
+        public class ApplicationDbContext : DbContext
+
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -34,6 +35,9 @@ namespace AI_Application.Data
         public DbSet<Users_Information> UsersInformation { get; set; } = default!;
 
         public DbSet<AI_Application.Models.SystemConfig> SystemConfigs { get; set; } = default!;
+
+        public DbSet<KnowledgeCategory> KnowledgeCategories { get; set; } = default!;
+
 
 
         protected override void OnModelCreating(ModelBuilder builder)
